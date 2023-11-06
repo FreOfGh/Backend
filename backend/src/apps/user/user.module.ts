@@ -6,7 +6,10 @@ import {RegisterUserController} from './controllers/register/register-user.contr
 import {UserCqrsConfig} from './config/user-cqrs.config';
 import {RegisterUserAppProvider} from '../../contexts/user/application/register/register-user.app.provider';
 import {JwtModule} from '@nestjs/jwt';
-import {ConfigModule} from '@nestjs/config';
+import {LoginUserController} from './controllers/login/login-user.controller';
+import {LoginStrategy} from '../../contexts/user/infrastructure/passport/login.strategy';
+import {LoginUserAppProvider} from '../../contexts/user/application/login/login-user.app.provider';
+import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/build-access-info.app.provider';
 
 @Module({
     imports: [
@@ -17,12 +20,16 @@ import {ConfigModule} from '@nestjs/config';
         }),
     ],
     controllers: [
+        LoginUserController,
         RegisterUserController,
     ],
     providers: [
+        LoginStrategy,
         UserDocumentProvider,
         MongoUserRepositoryProvider,
         ...UserCqrsConfig,
+        BuildAccessInfoAppProvider,
+        LoginUserAppProvider,
         RegisterUserAppProvider,
     ]
 })

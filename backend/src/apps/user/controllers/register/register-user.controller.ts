@@ -13,7 +13,7 @@ export class RegisterUserController extends AppController {
 
     protected readonly logger: Logger = new Logger(RegisterUserController.name);
 
-    @Post(UserConfigConstants.REGISTER_USER_APP)
+    @Post(UserConfigConstants.REGISTER_USER_URL)
     @ApiAcceptedResponse({type: RegisterUserControllerResponse})
     async controller(
         @Body() body: RegisterUserControllerRequest

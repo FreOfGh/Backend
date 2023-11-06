@@ -28,7 +28,7 @@ export class RegisterUserApp {
             status: UserStatusConstants.ACTIVE,
             tokens: 100,
             userId: UserId.create().toString(),
-            username,
+            username: username.toLowerCase(),
         });
     }
 

@@ -6,7 +6,7 @@ import {UserPassword} from './user-password';
 export class User {
     private readonly userId: UserId;
     private readonly username: string;
-    private readonly password: UserPassword;
+    public readonly password: UserPassword;
     private readonly cardType: string;
     private readonly status: UserStatus;
     private readonly tokens: number;

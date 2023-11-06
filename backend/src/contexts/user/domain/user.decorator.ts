@@ -1,4 +1,5 @@
 import {UserDto} from './user.dto';
+import {createParamDecorator, ExecutionContext} from '@nestjs/common';
 
 export type IUserDecorator = {
     userId: string;
@@ -8,3 +9,10 @@ export type IUserDecorator = {
 export const mapFromUser = (user: UserDto): IUserDecorator => {
     return {userId: user.userId, username: user.username};
 };
+
+export const User = createParamDecorator(
+    (data: unknown, ctx: ExecutionContext): IUserDecorator => {
+        const request = ctx.switchToHttp().getRequest();
+        return request.user;
+    },
+);
