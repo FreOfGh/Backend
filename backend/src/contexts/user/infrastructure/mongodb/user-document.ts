@@ -20,6 +20,10 @@ const definition: SchemaDefinitionType<User> = {
         required: true,
         index: true
     },
+    tokens: {
+        type: Number,
+        required: true,
+    },
     userId: {
         type: String,
         required: true,
@@ -30,6 +34,6 @@ const definition: SchemaDefinitionType<User> = {
         type: String,
         required: true,
         index: true,
-    }
+    },
 };
-export const UserSchema = new Schema(definition, {timestamps: true});
+export const UserSchema = new Schema(definition as Record<string, unknown>, {timestamps: true});

@@ -1,30 +1,34 @@
 import {UserId} from './user-id';
 import {UserStatus} from './user-status';
 import {UserDto} from './user.dto';
+import {UserPassword} from './user-password';
 
 export class User {
     private readonly userId: UserId;
     private readonly username: string;
-    private readonly password: string;
+    private readonly password: UserPassword;
     private readonly cardType: string;
     private readonly status: UserStatus;
-    private readonly createdAt: Date;
-    private readonly updatedAt: Date;
+    private readonly tokens: number;
+    private readonly createdAt?: Date;
+    private readonly updatedAt?: Date;
 
     constructor(
         userId: UserId,
         username: string,
-        password: string,
+        password: UserPassword,
         cardType: string,
         status: UserStatus,
-        createdAt: Date,
-        updatedAt: Date,
+        tokens: number,
+        createdAt?: Date,
+        updatedAt?: Date,
     ) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.cardType = cardType;
         this.status = status;
+        this.tokens = tokens;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -33,11 +37,12 @@ export class User {
         return new User(
             new UserId(payload.userId),
             payload.username,
-            payload.password,
+            new UserPassword(payload.password),
             payload.cardType,
             new UserStatus(payload.status),
-            new Date(payload.createdAt),
-            new Date(payload.updatedAt),
+            payload.tokens,
+            payload.createdAt ? new Date(payload.createdAt) : undefined,
+            payload.updatedAt ? new Date(payload.updatedAt) : undefined,
         );
     }
 
@@ -45,8 +50,9 @@ export class User {
         return {
             cardType: this.cardType,
             createdAt: this.createdAt,
-            password: this.password,
+            password: this.password.toString(),
             status: this.status.toString(),
+            tokens: this.tokens,
             updatedAt: this.updatedAt,
             userId: this.userId.toString(),
             username: this.username,
