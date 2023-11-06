@@ -4,9 +4,9 @@ import {UserDto} from './user.dto';
 import {UserPassword} from './user-password';
 
 export class User {
+    public readonly password: UserPassword;
     private readonly userId: UserId;
     private readonly username: string;
-    public readonly password: UserPassword;
     private readonly cardType: string;
     private readonly status: UserStatus;
     private readonly tokens: number;
