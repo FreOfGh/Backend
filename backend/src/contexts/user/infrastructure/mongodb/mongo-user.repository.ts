@@ -1,15 +1,24 @@
 import {IUserRepository} from '../../domain/i-user.repository';
 import {Logger} from '@nestjs/common';
-import {Model, Promise} from 'mongoose';
+import {Model} from 'mongoose';
 import {UserDocument} from './user-document';
 import {User} from '../../domain/user';
 import {UserDto} from '../../domain/user.dto';
+import {UserId} from '../../domain/user-id';
 
 export class MongoUserRepository implements IUserRepository {
 
     private readonly logger: Logger = new Logger(MongoUserRepository.name);
 
     constructor(private readonly model: Model<UserDocument>) {
+    }
+
+    public async findById(userId: UserId): Promise<User> {
+        this.logger.log(`[${this.findById.name}] INIT :: userId: ${userId.toString()}`);
+        const userFound: UserDto = await this.model.findOne({userId: userId.toString()});
+        const mapped: User = userFound ? User.fromPrimitives(userFound) : undefined;
+        this.logger.log(`[${this.findById.name}] FINISH ::`);
+        return mapped;
     }
 
     public async findByUsername(username: string): Promise<User> {

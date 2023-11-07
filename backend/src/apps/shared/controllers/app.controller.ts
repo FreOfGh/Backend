@@ -4,8 +4,6 @@ import {CommandBus, QueryBus} from '@nestjs/cqrs';
 @Injectable()
 export abstract class AppController {
 
-    protected abstract readonly logger: Logger;
-
     constructor(
         private readonly commandBus: CommandBus,
         private readonly queryBus: QueryBus

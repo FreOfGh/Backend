@@ -5,11 +5,11 @@ import {UserPassword} from './user-password';
 
 export class User {
     public readonly password: UserPassword;
+    public readonly tokens: number;
+    public readonly status: UserStatus;
     private readonly userId: UserId;
     private readonly username: string;
     private readonly cardType: string;
-    private readonly status: UserStatus;
-    private readonly tokens: number;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 

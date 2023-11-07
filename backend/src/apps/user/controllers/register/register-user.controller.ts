@@ -1,4 +1,4 @@
-import {Body, Controller, Logger, Post} from '@nestjs/common';
+import {Body, Controller, Post} from '@nestjs/common';
 import {AppController} from '../../../shared/controllers/app.controller';
 import {UserConfigConstants} from '../../config/user-config.constants';
 import {ApiAcceptedResponse, ApiTags} from '@nestjs/swagger';
@@ -10,8 +10,6 @@ import {RegisterUserCommand} from '../../../../contexts/user/application/registe
 @Controller(UserConfigConstants.CONTROLLER_PREFIX)
 @ApiTags(UserConfigConstants.API_TAG)
 export class RegisterUserController extends AppController {
-
-    protected readonly logger: Logger = new Logger(RegisterUserController.name);
 
     @Post(UserConfigConstants.REGISTER_USER_URL)
     @ApiAcceptedResponse({type: RegisterUserControllerResponse})

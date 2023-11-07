@@ -1,10 +1,12 @@
 import {GameId} from './game-id';
 import {GameStatus} from './game-status';
 import {GameDto} from './game.dto';
+import {UserId} from '../../user/domain/user-id';
 
 export class Game {
 
     private readonly gameId: GameId;
+    private readonly creatorId: UserId;
     private readonly requiredPlayers: number;
     private readonly name: string;
     private readonly isPublic: boolean;
@@ -16,6 +18,7 @@ export class Game {
 
     constructor(
         gameId: GameId,
+        creatorId: UserId,
         requiredPlayers: number,
         name: string,
         isPublic: boolean,
@@ -26,6 +29,7 @@ export class Game {
         updatedAt?: Date,
     ) {
         this.gameId = gameId;
+        this.creatorId = creatorId;
         this.requiredPlayers = requiredPlayers;
         this.name = name;
         this.isPublic = isPublic;
@@ -39,6 +43,7 @@ export class Game {
     public static fromPrimitives(payload: GameDto): Game {
         return new Game(
             new GameId(payload.gameId),
+            new UserId(payload.creatorId),
             payload.requiredPlayers,
             payload.name,
             payload.isPublic,
@@ -53,6 +58,7 @@ export class Game {
     public toPrimitives(): GameDto {
         return {
             createdAt: this.createdAt,
+            creatorId: this.creatorId.toString(),
             gameId: this.gameId.toString(),
             isPublic: this.isPublic,
             name: this.name,

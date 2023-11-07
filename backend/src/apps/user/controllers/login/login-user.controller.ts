@@ -1,4 +1,4 @@
-import {Controller, Logger, Post, UseGuards} from '@nestjs/common';
+import {Controller, Post, UseGuards} from '@nestjs/common';
 import {AppController} from '../../../shared/controllers/app.controller';
 import {UserConfigConstants} from '../../config/user-config.constants';
 import {ApiAcceptedResponse, ApiBody, ApiTags} from '@nestjs/swagger';
@@ -13,8 +13,6 @@ import {LoginUserControllerRequest} from './login-user.controller.request';
 @Controller(UserConfigConstants.CONTROLLER_PREFIX)
 @ApiTags(UserConfigConstants.API_TAG)
 export class LoginUserController extends AppController {
-
-    protected readonly logger: Logger = new Logger(LoginUserController.name);
 
     @Post(UserConfigConstants.LOGIN_USER_URL)
     @UseGuards(LoginGuard)

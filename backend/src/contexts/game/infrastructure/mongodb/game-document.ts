@@ -7,6 +7,10 @@ export type GameDocument = Game & Document;
 type Game = DocumentBase<GameDto>;
 
 const definition: SchemaDefinitionType<Game> = {
+    creatorId: {
+        type: String,
+        required: true,
+    },
     gameId: {
         type: String,
         required: true,

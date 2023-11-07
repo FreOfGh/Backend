@@ -2,6 +2,7 @@ import {ApiProperty} from '@nestjs/swagger';
 
 export class GameDto {
     @ApiProperty() gameId: string;
+    @ApiProperty() creatorId: string;
     @ApiProperty() requiredPlayers: number;
     @ApiProperty() name: string;
     @ApiProperty() isPublic: boolean;

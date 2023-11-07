@@ -10,6 +10,7 @@ import {LoginUserController} from './controllers/login/login-user.controller';
 import {LoginStrategy} from '../../contexts/user/infrastructure/passport/login.strategy';
 import {LoginUserAppProvider} from '../../contexts/user/application/login/login-user.app.provider';
 import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/build-access-info.app.provider';
+import {SearchUserByIdAppProvider} from '../../contexts/user/application/search/by-id/search-user-by-id.app.provider';
 
 @Module({
     imports: [
@@ -31,7 +32,9 @@ import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/
         BuildAccessInfoAppProvider,
         LoginUserAppProvider,
         RegisterUserAppProvider,
-    ]
+        SearchUserByIdAppProvider,
+    ],
+    exports: [SearchUserByIdAppProvider]
 })
 export class UserModule {
 }
