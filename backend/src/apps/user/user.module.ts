@@ -11,8 +11,12 @@ import {LoginStrategy} from '../../contexts/user/infrastructure/passport/login.s
 import {LoginUserAppProvider} from '../../contexts/user/application/login/login-user.app.provider';
 import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/build-access-info.app.provider';
 import {SearchUserByIdAppProvider} from '../../contexts/user/application/search/by-id/search-user-by-id.app.provider';
-import {UpdateUserAppProvider} from '../../contexts/user/application/update/update-user.app.provider';
+import {UpdateUserAppProvider} from '../../contexts/user/application/update/one/update-user.app.provider';
 import {CardDesignModule} from '../card-design/card-design.module';
+import {
+    UpdateUserCardDesignAppProvider
+} from '../../contexts/user/application/update/card-design/update-user-card-design.app.provider';
+import {UpdateUserCardDesignController} from './controllers/update/card-design/update-user-card-design.controller';
 
 @Module({
     imports: [
@@ -26,6 +30,7 @@ import {CardDesignModule} from '../card-design/card-design.module';
     controllers: [
         LoginUserController,
         RegisterUserController,
+        UpdateUserCardDesignController,
     ],
     providers: [
         LoginStrategy,
@@ -37,6 +42,7 @@ import {CardDesignModule} from '../card-design/card-design.module';
         RegisterUserAppProvider,
         SearchUserByIdAppProvider,
         UpdateUserAppProvider,
+        UpdateUserCardDesignAppProvider,
     ],
     exports: [
         SearchUserByIdAppProvider,

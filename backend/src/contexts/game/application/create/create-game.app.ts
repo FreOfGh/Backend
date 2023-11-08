@@ -10,7 +10,7 @@ import {UserIsAlreadyPlayingException} from '../../../user/domain/exceptions/use
 import {GameId} from '../../domain/game-id';
 import {GameStatusConstants} from '../../domain/game-status.constants';
 import {InvalidRequiredPlayersException} from '../../domain/exceptions/invalid-required-players.exception';
-import {UpdateUserApp} from '../../../user/application/update/update-user.app';
+import {UpdateUserApp} from '../../../user/application/update/one/update-user.app';
 import {UserStatus} from '../../../user/domain/user-status';
 import {CreatePlayerApp} from '../../../player/application/create/create-player.app';
 import {GameCode} from '../../domain/game-code';

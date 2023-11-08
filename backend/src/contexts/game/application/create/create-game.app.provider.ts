@@ -3,7 +3,7 @@ import {CreateGameApp} from './create-game.app';
 import {SearchUserByIdApp} from '../../../user/application/search/by-id/search-user-by-id.app';
 import {MongoGameRepository} from '../../infrastructure/mongodb/mongo-game.repository';
 import {IGameRepository} from '../../domain/i-game.repository';
-import {UpdateUserApp} from '../../../user/application/update/update-user.app';
+import {UpdateUserApp} from '../../../user/application/update/one/update-user.app';
 import {CreatePlayerApp} from '../../../player/application/create/create-player.app';
 
 export const CreateGameAppProvider: FactoryProvider<CreateGameApp> = {

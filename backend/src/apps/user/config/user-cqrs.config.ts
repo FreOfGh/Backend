@@ -3,11 +3,15 @@ import {LoginUserCommandHandler} from '../../../contexts/user/application/login/
 import {
     BuildAccessInfoCommandHandler
 } from '../../../contexts/user/application/build/build-access-info.command-handler';
+import {
+    UpdateUserCardDesignCommandHandler
+} from '../../../contexts/user/application/update/card-design/update-user-card-design.command-handler';
 
 const CommandHandlers = [
     BuildAccessInfoCommandHandler,
     LoginUserCommandHandler,
     RegisterUserCommandHandler,
+    UpdateUserCardDesignCommandHandler,
 ];
 export const UserCqrsConfig = [
     ...CommandHandlers,

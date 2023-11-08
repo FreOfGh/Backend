@@ -1,7 +1,7 @@
 import {Logger} from '@nestjs/common';
-import {User} from '../../domain/user';
-import {IUserRepository} from '../../domain/i-user.repository';
-import {UserNotUpdatedException} from '../../domain/exceptions/user-not-updated.exception';
+import {User} from '../../../domain/user';
+import {IUserRepository} from '../../../domain/i-user.repository';
+import {UserNotUpdatedException} from '../../../domain/exceptions/user-not-updated.exception';
 
 export class UpdateUserApp {
 

@@ -2,6 +2,7 @@ import {UserId} from './user-id';
 import {UserStatus} from './user-status';
 import {UserDto} from './user.dto';
 import {UserPassword} from './user-password';
+import {CardDesign} from '../../card-design/domain/card-design';
 
 export class User {
     public readonly password: UserPassword;
@@ -9,7 +10,7 @@ export class User {
     public readonly userId: UserId;
     private tokens: number;
     private readonly username: string;
-    private readonly cardDesign: string;
+    private cardDesign: string;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 
@@ -65,5 +66,9 @@ export class User {
 
     public removeTokens(value: number): void {
         if (value <= this.tokens) this.tokens = this.tokens - value;
+    }
+
+    public setCardDesign(cardDesign: CardDesign): void {
+        this.cardDesign = cardDesign.name;
     }
 }
