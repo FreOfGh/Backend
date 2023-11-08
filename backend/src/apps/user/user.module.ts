@@ -12,14 +12,16 @@ import {LoginUserAppProvider} from '../../contexts/user/application/login/login-
 import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/build-access-info.app.provider';
 import {SearchUserByIdAppProvider} from '../../contexts/user/application/search/by-id/search-user-by-id.app.provider';
 import {UpdateUserAppProvider} from '../../contexts/user/application/update/update-user.app.provider';
+import {CardDesignModule} from '../card-design/card-design.module';
 
 @Module({
     imports: [
-        SharedModule,
         JwtModule.register({
             secret: process.env.JWT_SECRET,
             signOptions: {expiresIn: process.env.JWT_EXPIRATION_TIME},
         }),
+        SharedModule,
+        CardDesignModule,
     ],
     controllers: [
         LoginUserController,
