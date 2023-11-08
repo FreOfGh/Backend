@@ -9,6 +9,7 @@ export class GameDto {
     @ApiProperty() totalBet: number;
     @ApiProperty() totalPlayers: number;
     @ApiProperty() status: string;
+    @ApiProperty() code: string;
     @ApiProperty() createdAt?: Date;
     @ApiProperty() updatedAt?: Date;
 }

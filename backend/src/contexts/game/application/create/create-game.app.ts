@@ -12,6 +12,9 @@ import {GameStatusConstants} from '../../domain/game-status.constants';
 import {InvalidRequiredPlayersException} from '../../domain/exceptions/invalid-required-players.exception';
 import {UpdateUserApp} from '../../../user/application/update/update-user.app';
 import {UserStatus} from '../../../user/domain/user-status';
+import {CreatePlayerApp} from '../../../player/application/create/create-player.app';
+import {GameCode} from '../../domain/game-code';
+import {TryAgainLaterException} from '../../../shared/domain/exceptions/try-again-later.exception';
 
 export class CreateGameApp {
 
@@ -20,6 +23,7 @@ export class CreateGameApp {
     constructor(
         private readonly searchUserByIdApp: SearchUserByIdApp,
         private readonly updateUserApp: UpdateUserApp,
+        private readonly createPlayerApp: CreatePlayerApp,
         private readonly repository: IGameRepository,
     ) {
     }
@@ -30,10 +34,12 @@ export class CreateGameApp {
         isPublic: boolean,
         totalBet: number,
         name: string,
+        code: GameCode,
     ): Game {
         return Game.fromPrimitives({
             creatorId: userId.toString(),
             gameId: GameId.create().toString(),
+            code: code.toString(),
             isPublic,
             name,
             requiredPlayers,
@@ -54,11 +60,22 @@ export class CreateGameApp {
         const user: User = await this.searchUserByIdApp.exec(userId);
         this.validateUser(user, totalBet);
         this.validateRequiredPlayers(requiredPlayers);
-        const game: Game = CreateGameApp.map(userId, requiredPlayers, isPublic, totalBet, name);
+        const code: GameCode = await this.generateCode();
+        const game: Game = CreateGameApp.map(userId, requiredPlayers, isPublic, totalBet, name, code);
         const created: Game = await this.repository.create(game);
+        await this.createPlayerApp.exec(userId, game.gameId);
         await this.updateUser(user, totalBet);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return created;
+    }
+
+    private async generateCode(): Promise<GameCode> {
+        this.logger.log(`[${this.generateCode.name}] Creating Code ::`);
+        for (let attempts: number = 0; attempts < 3; attempts++) {
+            const code: GameCode = GameCode.create();
+            if (!(await this.repository.findByCode(code))) return code;
+        }
+        throw new TryAgainLaterException();
     }
 
     private async updateUser(user: User, totalBet: number): Promise<void> {

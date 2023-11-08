@@ -2,10 +2,11 @@ import {GameId} from './game-id';
 import {GameStatus} from './game-status';
 import {GameDto} from './game.dto';
 import {UserId} from '../../user/domain/user-id';
+import {GameCode} from './game-code';
 
 export class Game {
 
-    private readonly gameId: GameId;
+    public readonly gameId: GameId;
     private readonly creatorId: UserId;
     private readonly requiredPlayers: number;
     private readonly name: string;
@@ -13,6 +14,7 @@ export class Game {
     private readonly totalBet: number;
     private readonly totalPlayers: number;
     private readonly status: GameStatus;
+    private readonly code: GameCode;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 
@@ -25,6 +27,7 @@ export class Game {
         totalBet: number,
         totalPlayers: number,
         status: GameStatus,
+        code: GameCode,
         createdAt?: Date,
         updatedAt?: Date,
     ) {
@@ -36,6 +39,7 @@ export class Game {
         this.totalBet = totalBet;
         this.totalPlayers = totalPlayers;
         this.status = status;
+        this.code = code;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -50,6 +54,7 @@ export class Game {
             payload.totalBet,
             payload.totalPlayers,
             new GameStatus(payload.status),
+            new GameCode(payload.code),
             payload.createdAt ? new Date(payload.createdAt) : undefined,
             payload.updatedAt ? new Date(payload.updatedAt) : undefined,
         );
@@ -57,6 +62,7 @@ export class Game {
 
     public toPrimitives(): GameDto {
         return {
+            code: this.code.toString(),
             createdAt: this.createdAt,
             creatorId: this.creatorId.toString(),
             gameId: this.gameId.toString(),

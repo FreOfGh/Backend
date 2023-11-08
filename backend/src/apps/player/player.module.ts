@@ -5,6 +5,10 @@ import {
     MongoPlayerRepositoryProvider
 } from '../../contexts/player/infrastructure/mongodb/mongo-player.repository.provider';
 import {PlayerCqrsConfig} from './config/player-cqrs.config';
+import {
+    SearchPlayerByUserAppProvider
+} from '../../contexts/player/application/search/by-user/search-player-by-user.app.provider';
+import {CreatePlayerAppProvider} from '../../contexts/player/application/create/create-player.app.provider';
 
 @Module({
     imports: [
@@ -14,6 +18,11 @@ import {PlayerCqrsConfig} from './config/player-cqrs.config';
         PlayerDocumentProvider,
         MongoPlayerRepositoryProvider,
         ...PlayerCqrsConfig,
+        CreatePlayerAppProvider,
+        SearchPlayerByUserAppProvider,
+    ],
+    exports: [
+        CreatePlayerAppProvider,
     ]
 })
 export class PlayerModule {

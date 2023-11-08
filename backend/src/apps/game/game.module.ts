@@ -10,11 +10,13 @@ import {
 import {UserModule} from '../user/user.module';
 import {CreateGameController} from './controllers/create/create-game.controller';
 import {CreateGameAppProvider} from '../../contexts/game/application/create/create-game.app.provider';
+import {PlayerModule} from '../player/player.module';
 
 @Module({
     imports: [
         SharedModule,
         UserModule,
+        PlayerModule,
     ],
     controllers: [
         CreateGameController,
