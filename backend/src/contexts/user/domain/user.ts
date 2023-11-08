@@ -5,11 +5,11 @@ import {UserPassword} from './user-password';
 
 export class User {
     public readonly password: UserPassword;
-    public readonly tokens: number;
-    public readonly status: UserStatus;
-    private readonly userId: UserId;
+    public status: UserStatus;
+    public readonly userId: UserId;
+    private tokens: number;
     private readonly username: string;
-    private readonly cardType: string;
+    private readonly cardDesign: string;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 
@@ -17,7 +17,7 @@ export class User {
         userId: UserId,
         username: string,
         password: UserPassword,
-        cardType: string,
+        cardDesign: string,
         status: UserStatus,
         tokens: number,
         createdAt?: Date,
@@ -26,7 +26,7 @@ export class User {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.cardType = cardType;
+        this.cardDesign = cardDesign;
         this.status = status;
         this.tokens = tokens;
         this.createdAt = createdAt;
@@ -38,7 +38,7 @@ export class User {
             new UserId(payload.userId),
             payload.username,
             new UserPassword(payload.password),
-            payload.cardType,
+            payload.cardDesign,
             new UserStatus(payload.status),
             payload.tokens,
             payload.createdAt ? new Date(payload.createdAt) : undefined,
@@ -48,7 +48,7 @@ export class User {
 
     public toPrimitives(): UserDto {
         return {
-            cardType: this.cardType,
+            cardDesign: this.cardDesign,
             createdAt: this.createdAt,
             password: this.password.toString(),
             status: this.status.toString(),
@@ -57,5 +57,13 @@ export class User {
             userId: this.userId.toString(),
             username: this.username,
         };
+    }
+
+    public getTokens(): number {
+        return this.tokens;
+    }
+
+    public removeTokens(value: number): void {
+        if (value <= this.tokens) this.tokens = this.tokens - value;
     }
 }

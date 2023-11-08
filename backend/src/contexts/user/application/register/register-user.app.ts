@@ -3,7 +3,7 @@ import {User} from '../../domain/user';
 import {IUserRepository} from '../../domain/i-user.repository';
 import {UserAlreadyExistsException} from '../../domain/exceptions/user-already-exists.exception';
 import {UserPassword} from '../../domain/user-password';
-import {CardTypeConstants} from '../../../card/domain/card-type.constants';
+import {CardDesignConstants} from '../../../card/domain/card-design.constants';
 import {UserStatusConstants} from '../../domain/user-status.constants';
 import {UserId} from '../../domain/user-id';
 import {RegisterUserAppResponse} from './register-user.app.response';
@@ -23,7 +23,7 @@ export class RegisterUserApp {
 
     private static map(username: string, password: string): User {
         return User.fromPrimitives({
-            cardType: CardTypeConstants.DEFAULT,
+            cardDesign: CardDesignConstants.DEFAULT,
             password: UserPassword.hash(password),
             status: UserStatusConstants.ACTIVE,
             tokens: 100,

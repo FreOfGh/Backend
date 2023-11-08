@@ -37,4 +37,13 @@ export class MongoUserRepository implements IUserRepository {
         this.logger.log(`[${this.create.name}] FINISH ::`);
         return mapped;
     }
+
+    public async update(user: User): Promise<User> {
+        this.logger.log(`[${this.update.name}] INIT :: Updating :: ${user.userId.toString()}`);
+        const {userId, ...toUpdate}: UserDto = user.toPrimitives();
+        const updated: UserDto = await this.model.findOneAndUpdate({userId}, toUpdate, {new: true});
+        const mapped: User = updated ? User.fromPrimitives(updated) : undefined;
+        this.logger.log(`[${this.update.name}] FINISH ::`);
+        return mapped;
+    }
 }

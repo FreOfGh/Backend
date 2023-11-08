@@ -11,6 +11,7 @@ import {LoginStrategy} from '../../contexts/user/infrastructure/passport/login.s
 import {LoginUserAppProvider} from '../../contexts/user/application/login/login-user.app.provider';
 import {BuildAccessInfoAppProvider} from '../../contexts/user/application/build/build-access-info.app.provider';
 import {SearchUserByIdAppProvider} from '../../contexts/user/application/search/by-id/search-user-by-id.app.provider';
+import {UpdateUserAppProvider} from '../../contexts/user/application/update/update-user.app.provider';
 
 @Module({
     imports: [
@@ -33,8 +34,12 @@ import {SearchUserByIdAppProvider} from '../../contexts/user/application/search/
         LoginUserAppProvider,
         RegisterUserAppProvider,
         SearchUserByIdAppProvider,
+        UpdateUserAppProvider,
     ],
-    exports: [SearchUserByIdAppProvider]
+    exports: [
+        SearchUserByIdAppProvider,
+        UpdateUserAppProvider,
+    ]
 })
 export class UserModule {
 }

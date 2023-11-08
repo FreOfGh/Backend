@@ -10,6 +10,8 @@ import {UserIsAlreadyPlayingException} from '../../../user/domain/exceptions/use
 import {GameId} from '../../domain/game-id';
 import {GameStatusConstants} from '../../domain/game-status.constants';
 import {InvalidRequiredPlayersException} from '../../domain/exceptions/invalid-required-players.exception';
+import {UpdateUserApp} from '../../../user/application/update/update-user.app';
+import {UserStatus} from '../../../user/domain/user-status';
 
 export class CreateGameApp {
 
@@ -17,6 +19,7 @@ export class CreateGameApp {
 
     constructor(
         private readonly searchUserByIdApp: SearchUserByIdApp,
+        private readonly updateUserApp: UpdateUserApp,
         private readonly repository: IGameRepository,
     ) {
     }
@@ -53,12 +56,19 @@ export class CreateGameApp {
         this.validateRequiredPlayers(requiredPlayers);
         const game: Game = CreateGameApp.map(userId, requiredPlayers, isPublic, totalBet, name);
         const created: Game = await this.repository.create(game);
+        await this.updateUser(user, totalBet);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return created;
     }
 
+    private async updateUser(user: User, totalBet: number): Promise<void> {
+        user.removeTokens(totalBet);
+        user.status = new UserStatus(UserStatusConstants.PLAYING);
+        await this.updateUserApp.exec(user);
+    }
+
     private validateUser(user: User, totalBet: number): void {
-        if (totalBet > user.tokens) throw new NotEnoughTokensException();
+        if (totalBet > user.getTokens()) throw new NotEnoughTokensException();
         if (user.status.toString() === UserStatusConstants.PLAYING) throw new UserIsAlreadyPlayingException();
     }
 

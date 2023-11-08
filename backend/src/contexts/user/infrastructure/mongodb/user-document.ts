@@ -7,7 +7,7 @@ export type UserDocument = User & Document;
 type User = DocumentBase<UserDto>;
 
 const definition: SchemaDefinitionType<User> = {
-    cardType: {
+    cardDesign: {
         type: String,
         required: true,
     },
