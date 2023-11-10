@@ -17,6 +17,7 @@ import {
     UpdateUserCardDesignAppProvider
 } from '../../contexts/user/application/update/card-design/update-user-card-design.app.provider';
 import {UpdateUserCardDesignController} from './controllers/update/card-design/update-user-card-design.controller';
+import {SearchUserByIdController} from './controllers/search/by-id/search-user-by-id.controller';
 
 @Module({
     imports: [
@@ -31,6 +32,7 @@ import {UpdateUserCardDesignController} from './controllers/update/card-design/u
         LoginUserController,
         RegisterUserController,
         UpdateUserCardDesignController,
+        SearchUserByIdController,
     ],
     providers: [
         LoginStrategy,

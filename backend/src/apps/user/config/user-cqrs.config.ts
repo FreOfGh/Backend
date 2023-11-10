@@ -6,6 +6,9 @@ import {
 import {
     UpdateUserCardDesignCommandHandler
 } from '../../../contexts/user/application/update/card-design/update-user-card-design.command-handler';
+import {
+    SearchUserByIdQueryHandler
+} from '../../../contexts/user/application/search/by-id/search-user-by-id.query-handler';
 
 const CommandHandlers = [
     BuildAccessInfoCommandHandler,
@@ -13,6 +16,12 @@ const CommandHandlers = [
     RegisterUserCommandHandler,
     UpdateUserCardDesignCommandHandler,
 ];
+
+const QueryHandlers = [
+    SearchUserByIdQueryHandler,
+];
+
 export const UserCqrsConfig = [
     ...CommandHandlers,
+    ...QueryHandlers,
 ];
