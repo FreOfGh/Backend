@@ -9,6 +9,9 @@ import {
     SearchPlayerByUserAppProvider
 } from '../../contexts/player/application/search/by-user/search-player-by-user.app.provider';
 import {CreatePlayerAppProvider} from '../../contexts/player/application/create/create-player.app.provider';
+import {
+    SearchPlayerByUserQueryHandler
+} from "../../contexts/player/application/search/by-user/search-player-by-user.query-handler";
 
 @Module({
     imports: [
@@ -22,6 +25,7 @@ import {CreatePlayerAppProvider} from '../../contexts/player/application/create/
         SearchPlayerByUserAppProvider,
     ],
     exports: [
+        SearchPlayerByUserQueryHandler,
         CreatePlayerAppProvider,
     ]
 })

@@ -13,7 +13,6 @@ import {UserIsAlreadyPlayingException} from '../../../user/domain/exceptions/use
 import {UserStatus} from '../../../user/domain/user-status';
 import {UpdateUserApp} from '../../../user/application/update/one/update-user.app';
 import {CreatePlayerApp} from '../../../player/application/create/create-player.app';
-import {GameStatus} from '../../domain/game-status';
 import {UpdateGameApp} from '../update/update-game.app';
 
 export class JoinGameApp {
@@ -56,7 +55,6 @@ export class JoinGameApp {
 
     private async updateGame(game: Game): Promise<Game> {
         game.addPlayer();
-        if (game.totalPlayers === game.requiredPlayers) game.status = new GameStatus(GameStatusConstants.ACTIVE);
         return this.updateGameApp.exec(game);
     }
 

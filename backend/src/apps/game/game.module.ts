@@ -17,12 +17,17 @@ import {
 import {UpdateGameAppProvider} from '../../contexts/game/application/update/update-game.app.provider';
 import {JoinGameAppProvider} from '../../contexts/game/application/join/join-game.app.provider';
 import {JoinGameController} from './controllers/join/join-game.controller';
+import {JoinGameRoomAppProvider} from '../../contexts/game/application/join/room/join-game-room.app.provider';
+import {SearchGameByIdAppProvider} from '../../contexts/game/application/search/by-id/search-game-by-id.app.provider';
+import {GameSocket} from './sockets/game.socket';
+import {JwtModule} from '@nestjs/jwt';
 
 @Module({
     imports: [
         SharedModule,
         UserModule,
         PlayerModule,
+        JwtModule,
     ],
     controllers: [
         CreateGameController,
@@ -30,6 +35,7 @@ import {JoinGameController} from './controllers/join/join-game.controller';
         SearchPublicGamesController,
     ],
     providers: [
+        GameSocket,
         GameDocumentProvider,
         MongoGameRepositoryProvider,
         ...GameCqrsConfig,
@@ -38,6 +44,8 @@ import {JoinGameController} from './controllers/join/join-game.controller';
         SearchGameByCodeAppProvider,
         UpdateGameAppProvider,
         JoinGameAppProvider,
+        JoinGameRoomAppProvider,
+        SearchGameByIdAppProvider,
     ]
 })
 export class GameModule {

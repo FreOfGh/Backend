@@ -6,6 +6,7 @@ import {Game} from '../../domain/game';
 import {GameDto} from '../../domain/game.dto';
 import {GameStatusConstants} from '../../domain/game-status.constants';
 import {GameCode} from '../../domain/game-code';
+import {GameId} from '../../domain/game-id';
 
 export class MongoGameRepository implements IGameRepository {
 
@@ -45,6 +46,14 @@ export class MongoGameRepository implements IGameRepository {
         const updated: GameDto = await this.model.findOneAndUpdate({gameId}, toUpdate, {new: true});
         const mapped: Game = updated ? Game.fromPrimitives(updated) : undefined;
         this.logger.log(`[${this.update.name}] FINISH ::`);
+        return mapped;
+    }
+
+    async findById(gameId: GameId): Promise<Game> {
+        this.logger.log(`[${this.findById.name}] INIT :: gameId: ${gameId.toString()}`);
+        const found: GameDto = await this.model.findOne({gameId: gameId.toString()});
+        const mapped: Game = found ? Game.fromPrimitives(found) : undefined;
+        this.logger.log(`[${this.findById.name}] FINISH ::`);
         return mapped;
     }
 }

@@ -1,0 +1,37 @@
+import {Logger} from '@nestjs/common';
+import {UserId} from '../../../../user/domain/user-id';
+import {GameId} from '../../../domain/game-id';
+import {SearchGameByIdApp} from '../../search/by-id/search-game-by-id.app';
+import {Game} from '../../../domain/game';
+import {GameSocket} from '../../../../../apps/game/sockets/game.socket';
+import {GameEventsConstants} from '../../../domain/game-events.constants';
+import {UpdateGameApp} from '../../update/update-game.app';
+import {GameStatusConstants} from '../../../domain/game-status.constants';
+import {GameStatus} from '../../../domain/game-status';
+import {GameAlreadyStartedException} from '../../../domain/exceptions/game-already-started.exception';
+
+export class JoinGameRoomApp {
+
+    private readonly logger: Logger = new Logger(JoinGameRoomApp.name);
+
+    constructor(
+        private readonly searchGameByIdApp: SearchGameByIdApp,
+        private readonly updateGameApp: UpdateGameApp,
+        private readonly socket: GameSocket,
+    ) {
+    }
+
+    public async exec(userId: UserId, gameId: GameId): Promise<void> {
+        this.logger.log(`[${this.exec.name}] INIT :: userId: ${userId.toString()}, gameId: ${gameId.toString()}`);
+        const game: Game = await this.searchGameByIdApp.exec(gameId);
+        if (game.status.toString() !== GameStatusConstants.WAITING_PLAYERS) throw new GameAlreadyStartedException();
+        if (game.requiredPlayers === game.totalPlayers) {
+            this.socket.wsServer
+                .in(gameId.toString())
+                .emit(GameEventsConstants.EVENT_START_GAME, {start: true});
+            game.status = new GameStatus(GameStatusConstants.ACTIVE);
+            await this.updateGameApp.exec(game);
+        }
+        this.logger.log(`[${this.exec.name}] FINISH ::`);
+    }
+}

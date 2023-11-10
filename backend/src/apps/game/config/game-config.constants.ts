@@ -5,4 +5,5 @@ export enum GameConfigConstants {
     CREATE_GAME = 'create',
     JOIN_GAME = 'join',
     UPDATE_CARD_DESIGN = 'card-design',
+    SOCKET_NAMESPACE = 'games',
 }
