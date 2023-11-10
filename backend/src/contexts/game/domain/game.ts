@@ -3,17 +3,18 @@ import {GameStatus} from './game-status';
 import {GameDto} from './game.dto';
 import {UserId} from '../../user/domain/user-id';
 import {GameCode} from './game-code';
+import {GameStatusConstants} from './game-status.constants';
 
 export class Game {
 
     public readonly gameId: GameId;
+    public readonly requiredPlayers: number;
+    public readonly totalBet: number;
+    public totalPlayers: number;
+    public status: GameStatus;
     private readonly creatorId: UserId;
-    private readonly requiredPlayers: number;
     private readonly name: string;
     private readonly isPublic: boolean;
-    private readonly totalBet: number;
-    private readonly totalPlayers: number;
-    private readonly status: GameStatus;
     private readonly code: GameCode;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
@@ -74,5 +75,11 @@ export class Game {
             totalPlayers: this.totalPlayers,
             updatedAt: this.updatedAt,
         };
+    }
+
+    public addPlayer(): void {
+        if (this.status.toString() === GameStatusConstants.WAITING_PLAYERS &&
+            this.requiredPlayers > this.totalPlayers
+        ) this.totalPlayers++;
     }
 }

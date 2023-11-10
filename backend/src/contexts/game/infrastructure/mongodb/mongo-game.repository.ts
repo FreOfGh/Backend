@@ -38,4 +38,13 @@ export class MongoGameRepository implements IGameRepository {
         this.logger.log(`[${this.findByCode.name}] FINISH ::`);
         return mapped;
     }
+
+    public async update(game: Game): Promise<Game> {
+        this.logger.log(`[${this.update.name}] INIT :: Updating :: ${game.gameId.toString()}`);
+        const {gameId, ...toUpdate}: GameDto = game.toPrimitives();
+        const updated: GameDto = await this.model.findOneAndUpdate({gameId}, toUpdate, {new: true});
+        const mapped: Game = updated ? Game.fromPrimitives(updated) : undefined;
+        this.logger.log(`[${this.update.name}] FINISH ::`);
+        return mapped;
+    }
 }
