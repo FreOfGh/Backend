@@ -16,10 +16,6 @@ const definition: SchemaDefinitionType<Match> = {
         type: Number,
         required: true,
     },
-    currentPosition: {
-        type: Number,
-        required: true,
-    },
     discardedCards: {
         type: [CardSchema],
         required: true,

@@ -10,19 +10,17 @@ import {Card} from '../../card/domain/card';
 export class Match {
 
     public readonly gameId: GameId;
-    private readonly matchId: MatchId;
-    private readonly currentPosition: number;
-    private readonly currentPlayers: number;
-    private readonly turn: number;
+    public readonly matchId: MatchId;
+    public readonly discardedCards: Array<Card>;
+    public readonly currentPlayers: number;
+    public turn: number;
     private readonly status: MatchStatus;
-    private readonly discardedCards: Array<Card>;
     private readonly cardsDeck: Array<Card>;
 
 
     constructor(
         gameId: GameId,
         matchId: MatchId,
-        currentPosition: number,
         currentPlayers: number,
         turn: number,
         status: MatchStatus,
@@ -31,7 +29,6 @@ export class Match {
     ) {
         this.gameId = gameId;
         this.matchId = matchId;
-        this.currentPosition = currentPosition;
         this.currentPlayers = currentPlayers;
         this.turn = turn;
         this.status = status;
@@ -43,7 +40,6 @@ export class Match {
         return new Match(
             new GameId(payload.gameId),
             new MatchId(payload.matchId),
-            payload.currentPosition,
             payload.currentPlayers,
             payload.turn,
             new MatchStatus(payload.status),
@@ -78,7 +74,6 @@ export class Match {
     public toPrimitives(): MatchDto {
         return {
             cardsDeck: this.cardsDeck.map(c => c.toPrimitives()),
-            currentPosition: this.currentPosition,
             currentPlayers: this.currentPlayers,
             discardedCards: this.discardedCards.map(c => c.toPrimitives()),
             gameId: this.gameId.toString(),

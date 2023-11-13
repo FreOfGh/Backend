@@ -3,6 +3,8 @@ import {ArgumentsHost, Catch, ExceptionFilter, HttpException} from '@nestjs/comm
 import {ExceptionResponse} from '../../domain/exception.response';
 import {HttpArgumentsHost, RpcArgumentsHost, WsArgumentsHost} from '@nestjs/common/interfaces';
 import {Exception} from '../../domain/exception';
+import {Socket} from 'socket.io';
+import {SharedEventsConstants} from '../../domain/shared-events.constants';
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {
@@ -46,6 +48,10 @@ export class AppExceptionFilter implements ExceptionFilter {
             context = host.switchToHttp();
             response = context.getResponse<Response>();
             response.status(exceptionResponse.code).json(exceptionResponse);
+            break;
+        case 'ws':
+            context = host.switchToWs();
+            context.getClient<Socket>().emit(SharedEventsConstants.EVENT_ERROR, exceptionResponse);
             break;
         }
     }

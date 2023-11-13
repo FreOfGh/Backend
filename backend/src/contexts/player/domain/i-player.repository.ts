@@ -8,7 +8,7 @@ export interface IPlayerRepository {
 
     findByUserId(userId: UserId): Promise<Player>;
 
-    findStartPlayer(gameId: GameId): Promise<Player>;
+    findByPosition(gameId: GameId, position: number): Promise<Player>;
 
     create(player: Player): Promise<Player>;
 

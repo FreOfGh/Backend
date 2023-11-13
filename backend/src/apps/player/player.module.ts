@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {forwardRef, Module} from '@nestjs/common';
 import {SharedModule} from '../shared/shared.module';
 import {PlayerDocumentProvider} from '../../contexts/player/infrastructure/mongodb/player-document.provider';
 import {
@@ -17,13 +17,19 @@ import {
 } from '../../contexts/player/application/search/by-game/search-players-by-game.app.provider';
 import {UpdatePlayerAppProvider} from '../../contexts/player/application/update/update-player.app.provider';
 import {
-    SearchStartPlayerAppProvider
-} from '../../contexts/player/application/search/start/search-start-player.app.provider';
+    SearchPlayerByPositionAppProvider
+} from '../../contexts/player/application/search/by-position/search-player-by-position.app.provider';
 import {SearchPlayersByGameController} from './controllers/search/by-game/search-players-by-game.controller';
+import {ThrowCardCommandHandler} from '../../contexts/player/application/throw-card/throw-card.command-handler';
+import {ThrowCardAppProvider} from '../../contexts/player/application/throw-card/throw-card.app.provider';
+import {MatchModule} from '../match/match.module';
+import {GameModule} from '../game/game.module';
 
 @Module({
     imports: [
         SharedModule,
+        MatchModule,
+        forwardRef(() => GameModule),
     ],
     controllers: [
         SearchPlayersByGameController,
@@ -36,14 +42,16 @@ import {SearchPlayersByGameController} from './controllers/search/by-game/search
         SearchPlayerByUserAppProvider,
         SearchPlayersByGameAppProvider,
         UpdatePlayerAppProvider,
-        SearchStartPlayerAppProvider,
+        SearchPlayerByPositionAppProvider,
+        ThrowCardAppProvider,
     ],
     exports: [
         SearchPlayerByUserQueryHandler,
+        ThrowCardCommandHandler,
         CreatePlayerAppProvider,
         SearchPlayersByGameAppProvider,
         UpdatePlayerAppProvider,
-        SearchStartPlayerAppProvider,
+        SearchPlayerByPositionAppProvider,
     ]
 })
 export class PlayerModule {

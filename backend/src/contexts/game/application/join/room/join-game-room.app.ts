@@ -9,7 +9,7 @@ import {GameStatusConstants} from '../../../domain/game-status.constants';
 import {GameStatus} from '../../../domain/game-status';
 import {GameAlreadyStartedException} from '../../../domain/exceptions/game-already-started.exception';
 import {CreateMatchApp} from '../../../../match/application/create/create-match.app';
-import {SearchStartPlayerApp} from '../../../../player/application/search/start/search-start-player.app';
+import {SearchPlayerByPositionApp} from '../../../../player/application/search/by-position/search-player-by-position.app';
 import {Player} from '../../../../player/domain/player';
 
 export class JoinGameRoomApp {
@@ -18,7 +18,7 @@ export class JoinGameRoomApp {
 
     constructor(
         private readonly searchGameByIdApp: SearchGameByIdApp,
-        private readonly searchStartPlayerApp: SearchStartPlayerApp,
+        private readonly searchPlayerByPositionApp: SearchPlayerByPositionApp,
         private readonly updateGameApp: UpdateGameApp,
         private readonly crateMatchApp: CreateMatchApp,
         private readonly socket: GameSocket,
@@ -41,7 +41,7 @@ export class JoinGameRoomApp {
     }
 
     private async notifyStartPlayer(gameId: GameId): Promise<void> {
-        const player: Player = await this.searchStartPlayerApp.exec(gameId);
+        const player: Player = await this.searchPlayerByPositionApp.exec(gameId, 1);
         this.socket.wsServer
             .in(player.playerId.toString())
             .emit(GameEventsConstants.EVENT_START_TURN);

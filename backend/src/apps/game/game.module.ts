@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {forwardRef, Module} from '@nestjs/common';
 import {SharedModule} from '../shared/shared.module';
 import {GameDocumentProvider} from '../../contexts/game/infrastructure/mongodb/game-document.provider';
 import {MongoGameRepositoryProvider} from '../../contexts/game/infrastructure/mongodb/mongo-game.repository.provider';
@@ -28,7 +28,7 @@ import {MatchModule} from '../match/match.module';
         JwtModule,
         SharedModule,
         UserModule,
-        PlayerModule,
+        forwardRef(() => PlayerModule),
         MatchModule,
     ],
     controllers: [
@@ -48,7 +48,8 @@ import {MatchModule} from '../match/match.module';
         JoinGameAppProvider,
         JoinGameRoomAppProvider,
         SearchGameByIdAppProvider,
-    ]
+    ],
+    exports: [GameSocket]
 })
 export class GameModule {
 }

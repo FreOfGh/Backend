@@ -14,7 +14,7 @@ export class Player {
     public readonly terna2: Array<Card>;
     public readonly cuarta: Array<Card>;
     public sobrante?: Card;
-    private readonly gameId: GameId;
+    public readonly gameId: GameId;
     private readonly userId: UserId;
     private readonly score: number;
 
@@ -64,7 +64,7 @@ export class Player {
             playerId: this.playerId.toString(),
             position: this.position,
             score: this.score,
-            sobrante: this.sobrante?.toPrimitives(),
+            sobrante: this.sobrante ? this.sobrante.toPrimitives() : null,
             status: this.status.toString(),
             terna1: this.terna1.map(c => c.toPrimitives()),
             terna2: this.terna2.map(c => c.toPrimitives()),

@@ -4,12 +4,14 @@ import {SearchGameByIdApp} from '../../search/by-id/search-game-by-id.app';
 import {UpdateGameApp} from '../../update/update-game.app';
 import {GameSocket} from '../../../../../apps/game/sockets/game.socket';
 import {CreateMatchApp} from '../../../../match/application/create/create-match.app';
-import {SearchStartPlayerApp} from '../../../../player/application/search/start/search-start-player.app';
+import {
+    SearchPlayerByPositionApp
+} from '../../../../player/application/search/by-position/search-player-by-position.app';
 
 export const JoinGameRoomAppProvider: FactoryProvider<JoinGameRoomApp> = {
     inject: [
         SearchGameByIdApp,
-        SearchStartPlayerApp,
+        SearchPlayerByPositionApp,
         UpdateGameApp,
         CreateMatchApp,
         GameSocket,
@@ -17,14 +19,14 @@ export const JoinGameRoomAppProvider: FactoryProvider<JoinGameRoomApp> = {
     provide: JoinGameRoomApp,
     useFactory(
         searchGameByIdApp: SearchGameByIdApp,
-        searchStartPlayerApp: SearchStartPlayerApp,
+        searchPlayerByPositionApp: SearchPlayerByPositionApp,
         updateGameApp: UpdateGameApp,
         createMatchApp: CreateMatchApp,
         socket: GameSocket,
     ): JoinGameRoomApp {
         return new JoinGameRoomApp(
             searchGameByIdApp,
-            searchStartPlayerApp,
+            searchPlayerByPositionApp,
             updateGameApp,
             createMatchApp,
             socket,

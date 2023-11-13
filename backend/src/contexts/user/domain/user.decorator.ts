@@ -12,7 +12,15 @@ export const mapFromUser = (user: UserDto): IUserDecorator => {
 
 export const User = createParamDecorator(
     (data: unknown, ctx: ExecutionContext): IUserDecorator => {
-        const request = ctx.switchToHttp().getRequest();
-        return request.user;
+        switch (ctx.getType()) {
+        case 'http': {
+            const request = ctx.switchToHttp().getRequest();
+            return request.user;
+        }
+        case 'ws': {
+            const query = ctx.switchToWs().getClient().handshake.query;
+            return JSON.parse(query.user);
+        }
+        }
     },
 );

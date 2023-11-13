@@ -25,7 +25,6 @@ export class CreateMatchApp {
 
     private static map(gameId: GameId, currentPlayers: number): Match {
         return Match.fromPrimitives({
-            currentPosition: 1,
             gameId: gameId.toString(),
             matchId: MatchId.create().toString(),
             status: MatchStatusConstants.PLAYING,
