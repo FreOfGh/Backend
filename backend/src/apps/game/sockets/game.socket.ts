@@ -36,7 +36,8 @@ export class GameSocket extends AppSocket {
             const user: IUserDecorator = this.jwt.verify(token, {secret: process.env.JWT_SECRET});
             const player: PlayerDto = await this.query<PlayerDto, SearchPlayerByUserQuery>(new SearchPlayerByUserQuery(user.userId));
             client.join(player.gameId);
-            await this.dispatch<void, JoinGameRoomCommand>(new JoinGameRoomCommand(user.userId, player.gameId));
+            client.join(player.playerId);
+            await this.dispatch<void, JoinGameRoomCommand>(new JoinGameRoomCommand(player.gameId));
         } catch {
             client.disconnect();
         }

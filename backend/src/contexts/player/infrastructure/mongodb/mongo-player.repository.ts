@@ -5,12 +5,21 @@ import {PlayerDocument} from './player-document';
 import {UserId} from '../../../user/domain/user-id';
 import {Player} from '../../domain/player';
 import {PlayerDto} from '../../domain/player.dto';
+import {GameId} from '../../../game/domain/game-id';
 
 export class MongoPlayerRepository implements IPlayerRepository {
 
     private readonly logger: Logger = new Logger(MongoPlayerRepository.name);
 
     constructor(private readonly model: Model<PlayerDocument>) {
+    }
+
+    public async findByGame(gameId: GameId): Promise<Array<Player>> {
+        this.logger.log(`[${this.findByGame.name}] INIT :: gameId: ${gameId.toString()}`);
+        const playersFound: Array<PlayerDto> = await this.model.find({gameId: gameId.toString()});
+        const mapped: Array<Player> = playersFound.map(Player.fromPrimitives);
+        this.logger.log(`[${this.findByGame.name}] FINISH ::`);
+        return mapped;
     }
 
     public async findByUserId(userId: UserId): Promise<Player> {

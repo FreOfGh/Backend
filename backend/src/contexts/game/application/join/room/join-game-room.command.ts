@@ -1,7 +1,4 @@
 export class JoinGameRoomCommand {
-    constructor(
-        public readonly userId: string,
-        public readonly gameId: string,
-    ) {
+    constructor(public readonly gameId: string) {
     }
 }

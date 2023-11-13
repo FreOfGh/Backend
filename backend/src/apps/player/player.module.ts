@@ -11,7 +11,10 @@ import {
 import {CreatePlayerAppProvider} from '../../contexts/player/application/create/create-player.app.provider';
 import {
     SearchPlayerByUserQueryHandler
-} from "../../contexts/player/application/search/by-user/search-player-by-user.query-handler";
+} from '../../contexts/player/application/search/by-user/search-player-by-user.query-handler';
+import {
+    SearchPlayersByGameAppProvider
+} from '../../contexts/player/application/search/by-game/search-players-by-game.app.provider';
 
 @Module({
     imports: [
@@ -23,10 +26,12 @@ import {
         ...PlayerCqrsConfig,
         CreatePlayerAppProvider,
         SearchPlayerByUserAppProvider,
+        SearchPlayersByGameAppProvider,
     ],
     exports: [
         SearchPlayerByUserQueryHandler,
         CreatePlayerAppProvider,
+        SearchPlayersByGameAppProvider,
     ]
 })
 export class PlayerModule {
