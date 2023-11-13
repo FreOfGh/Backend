@@ -8,7 +8,8 @@ import {UpdateGameApp} from '../../update/update-game.app';
 import {GameStatusConstants} from '../../../domain/game-status.constants';
 import {GameStatus} from '../../../domain/game-status';
 import {GameAlreadyStartedException} from '../../../domain/exceptions/game-already-started.exception';
-import {SearchPlayersByGameApp} from '../../../../player/application/search/by-game/search-players-by-game.app';
+import {CreateMatchApp} from '../../../../match/application/create/create-match.app';
+import {SearchStartPlayerApp} from '../../../../player/application/search/start/search-start-player.app';
 import {Player} from '../../../../player/domain/player';
 
 export class JoinGameRoomApp {
@@ -17,8 +18,9 @@ export class JoinGameRoomApp {
 
     constructor(
         private readonly searchGameByIdApp: SearchGameByIdApp,
+        private readonly searchStartPlayerApp: SearchStartPlayerApp,
         private readonly updateGameApp: UpdateGameApp,
-        private readonly searchPlayersByGameApp: SearchPlayersByGameApp,
+        private readonly crateMatchApp: CreateMatchApp,
         private readonly socket: GameSocket,
     ) {
     }
@@ -28,22 +30,25 @@ export class JoinGameRoomApp {
         const game: Game = await this.searchGameByIdApp.exec(gameId);
         if (game.status.toString() !== GameStatusConstants.WAITING_PLAYERS) throw new GameAlreadyStartedException();
         if (game.requiredPlayers === game.totalPlayers) {
-            const startPlayer: Player = await this.updatePlayers(gameId, game.requiredPlayers);
+            const updated: Game = await this.updateGame(game);
+            await this.crateMatchApp.exec(updated);
             this.socket.wsServer
                 .in(gameId.toString())
-                .emit(GameEventsConstants.EVENT_START_GAME, {start: true});
-            game.status = new GameStatus(GameStatusConstants.ACTIVE);
-            await this.updateGameApp.exec(game);
+                .emit(GameEventsConstants.EVENT_START_GAME);
+            await this.notifyStartPlayer(gameId);
         }
         this.logger.log(`[${this.exec.name}] FINISH ::`);
     }
 
-    private async updatePlayers(gameId: GameId, requiredPlayers: number): Promise<Player> {
-        const allowed: Array<number> = Array.from({length: requiredPlayers}, (_, i) => i + 1);
-        const players: Array<Player> = await this.searchPlayersByGameApp.exec(gameId);
-        for (const player in players) {
+    private async notifyStartPlayer(gameId: GameId): Promise<void> {
+        const player: Player = await this.searchStartPlayerApp.exec(gameId);
+        this.socket.wsServer
+            .in(player.playerId.toString())
+            .emit(GameEventsConstants.EVENT_START_TURN);
+    }
 
-        }
-        return;
+    private async updateGame(game: Game): Promise<Game> {
+        game.status = new GameStatus(GameStatusConstants.ACTIVE);
+        return this.updateGameApp.exec(game);
     }
 }

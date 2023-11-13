@@ -30,12 +30,29 @@ export class MongoPlayerRepository implements IPlayerRepository {
         return mapped;
     }
 
+    public async findStartPlayer(gameId: GameId): Promise<Player> {
+        this.logger.log(`[${this.findStartPlayer.name}] INIT :: gameId: ${gameId.toString()}`);
+        const playerFound: PlayerDto = await this.model.findOne({position: 1});
+        const mapped: Player = playerFound ? Player.fromPrimitives(playerFound) : undefined;
+        this.logger.log(`[${this.findStartPlayer.name}] FINISH ::`);
+        return mapped;
+    }
+
     public async create(player: Player): Promise<Player> {
         this.logger.log(`[${this.create.name}] INIT ::`);
         const model = new this.model(player.toPrimitives());
         await model.save();
         const mapped: Player = Player.fromPrimitives(model);
         this.logger.log(`[${this.create.name}] FINISH ::`);
+        return mapped;
+    }
+
+    public async update(player: Player): Promise<Player> {
+        this.logger.log(`[${this.update.name}] INIT :: Updating :: ${player.playerId.toString()}`);
+        const {playerId, ...toUpdate}: PlayerDto = player.toPrimitives();
+        const updated: PlayerDto = await this.model.findOneAndUpdate({playerId}, toUpdate, {new: true});
+        const mapped: Player = updated ? Player.fromPrimitives(updated) : undefined;
+        this.logger.log(`[${this.update.name}] FINISH ::`);
         return mapped;
     }
 }

@@ -21,13 +21,15 @@ import {JoinGameRoomAppProvider} from '../../contexts/game/application/join/room
 import {SearchGameByIdAppProvider} from '../../contexts/game/application/search/by-id/search-game-by-id.app.provider';
 import {GameSocket} from './sockets/game.socket';
 import {JwtModule} from '@nestjs/jwt';
+import {MatchModule} from '../match/match.module';
 
 @Module({
     imports: [
+        JwtModule,
         SharedModule,
         UserModule,
         PlayerModule,
-        JwtModule,
+        MatchModule,
     ],
     controllers: [
         CreateGameController,

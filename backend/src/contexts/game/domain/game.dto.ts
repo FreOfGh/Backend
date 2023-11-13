@@ -4,6 +4,7 @@ export class GameDto {
     @ApiProperty() gameId: string;
     @ApiProperty() creatorId: string;
     @ApiProperty() requiredPlayers: number;
+    @ApiProperty() currentPlayers: number;
     @ApiProperty() name: string;
     @ApiProperty() isPublic: boolean;
     @ApiProperty() totalBet: number;

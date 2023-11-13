@@ -16,6 +16,10 @@ const definition: SchemaDefinitionType<Game> = {
         type: String,
         required: true,
     },
+    currentPlayers: {
+        type: Number,
+        required: true,
+    },
     gameId: {
         type: String,
         required: true,

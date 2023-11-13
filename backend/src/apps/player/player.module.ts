@@ -15,6 +15,10 @@ import {
 import {
     SearchPlayersByGameAppProvider
 } from '../../contexts/player/application/search/by-game/search-players-by-game.app.provider';
+import {UpdatePlayerAppProvider} from '../../contexts/player/application/update/update-player.app.provider';
+import {
+    SearchStartPlayerAppProvider
+} from '../../contexts/player/application/search/start/search-start-player.app.provider';
 
 @Module({
     imports: [
@@ -27,11 +31,15 @@ import {
         CreatePlayerAppProvider,
         SearchPlayerByUserAppProvider,
         SearchPlayersByGameAppProvider,
+        UpdatePlayerAppProvider,
+        SearchStartPlayerAppProvider,
     ],
     exports: [
         SearchPlayerByUserQueryHandler,
         CreatePlayerAppProvider,
         SearchPlayersByGameAppProvider,
+        UpdatePlayerAppProvider,
+        SearchStartPlayerAppProvider,
     ]
 })
 export class PlayerModule {

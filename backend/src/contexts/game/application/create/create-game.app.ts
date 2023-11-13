@@ -45,7 +45,8 @@ export class CreateGameApp {
             requiredPlayers,
             status: GameStatusConstants.WAITING_PLAYERS,
             totalBet,
-            totalPlayers: 1
+            totalPlayers: 1,
+            currentPlayers: 1,
         });
     }
 

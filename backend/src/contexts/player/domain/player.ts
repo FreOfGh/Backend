@@ -7,11 +7,11 @@ import {PlayerDto} from './player.dto';
 
 export class Player {
 
-    private readonly playerId: PlayerId;
+    public position: number;
+    public readonly playerId: PlayerId;
+    public status: PlayerStatus;
     private readonly gameId: GameId;
     private readonly userId: UserId;
-    private readonly position: number;
-    private readonly status: PlayerStatus;
     private readonly score: number;
     private readonly terna1?: Array<Card>;
     private readonly terna2?: Array<Card>;

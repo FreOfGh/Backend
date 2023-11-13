@@ -4,12 +4,21 @@ import {MatchDocumentProvider} from '../../contexts/match/infrastructure/mongodb
 import {
     MongoMatchRepositoryProvider
 } from '../../contexts/match/infrastructure/mongodb/mongo-match.repository.provider';
+import {CreateMatchAppProvider} from '../../contexts/match/application/create/create-match.app.provider';
+import {PlayerModule} from '../player/player.module';
 
 @Module({
-    imports: [SharedModule],
+    imports: [
+        SharedModule,
+        PlayerModule,
+    ],
     providers: [
         MatchDocumentProvider,
         MongoMatchRepositoryProvider,
+        CreateMatchAppProvider,
+    ],
+    exports: [
+        CreateMatchAppProvider,
     ]
 })
 export class MatchModule {

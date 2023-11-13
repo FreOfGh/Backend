@@ -1,3 +1,6 @@
 export enum MatchStatusConstants {
-    WAITING_PLAYERS = 'WAITING_PLAYERS',
+    PLAYING = 'PLAYING',
+    TOUCHING = 'TOUCHING',
+    SHOWING_RESULTS = 'SHOWING_RESULTS',
+    FINISHED = 'FINISHED',
 }

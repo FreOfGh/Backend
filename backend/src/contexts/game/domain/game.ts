@@ -11,6 +11,7 @@ export class Game {
     public readonly requiredPlayers: number;
     public readonly totalBet: number;
     public totalPlayers: number;
+    public currentPlayers: number;
     public status: GameStatus;
     private readonly creatorId: UserId;
     private readonly name: string;
@@ -23,6 +24,7 @@ export class Game {
         gameId: GameId,
         creatorId: UserId,
         requiredPlayers: number,
+        currentPlayers: number,
         name: string,
         isPublic: boolean,
         totalBet: number,
@@ -35,6 +37,7 @@ export class Game {
         this.gameId = gameId;
         this.creatorId = creatorId;
         this.requiredPlayers = requiredPlayers;
+        this.currentPlayers = currentPlayers;
         this.name = name;
         this.isPublic = isPublic;
         this.totalBet = totalBet;
@@ -50,6 +53,7 @@ export class Game {
             new GameId(payload.gameId),
             new UserId(payload.creatorId),
             payload.requiredPlayers,
+            payload.currentPlayers,
             payload.name,
             payload.isPublic,
             payload.totalBet,
@@ -66,6 +70,7 @@ export class Game {
             code: this.code.toString(),
             createdAt: this.createdAt,
             creatorId: this.creatorId.toString(),
+            currentPlayers: this.currentPlayers,
             gameId: this.gameId.toString(),
             isPublic: this.isPublic,
             name: this.name,
@@ -80,6 +85,9 @@ export class Game {
     public addPlayer(): void {
         if (this.status.toString() === GameStatusConstants.WAITING_PLAYERS &&
             this.requiredPlayers > this.totalPlayers
-        ) this.totalPlayers++;
+        ) {
+            this.totalPlayers++;
+            this.currentPlayers++;
+        }
     }
 }
