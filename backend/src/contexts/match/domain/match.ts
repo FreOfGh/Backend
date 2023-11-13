@@ -5,6 +5,7 @@ import {MatchDto} from './match.dto';
 import {Player} from '../../player/domain/player';
 import {PlayerStatus} from '../../player/domain/player-status';
 import {PlayerStatusConstants} from '../../player/domain/player-status.constants';
+import {Card} from '../../card/domain/card';
 
 export class Match {
 
@@ -14,6 +15,8 @@ export class Match {
     private readonly currentPlayers: number;
     private readonly turn: number;
     private readonly status: MatchStatus;
+    private readonly discardedCards: Array<Card>;
+    private readonly cardsDeck: Array<Card>;
 
 
     constructor(
@@ -23,6 +26,8 @@ export class Match {
         currentPlayers: number,
         turn: number,
         status: MatchStatus,
+        discardedCards: Array<Card>,
+        cardsDeck: Array<Card>,
     ) {
         this.gameId = gameId;
         this.matchId = matchId;
@@ -30,6 +35,8 @@ export class Match {
         this.currentPlayers = currentPlayers;
         this.turn = turn;
         this.status = status;
+        this.discardedCards = discardedCards;
+        this.cardsDeck = cardsDeck;
     }
 
     public static fromPrimitives(payload: MatchDto): Match {
@@ -40,6 +47,8 @@ export class Match {
             payload.currentPlayers,
             payload.turn,
             new MatchStatus(payload.status),
+            payload.discardedCards.map(Card.fromPrimitives),
+            payload.cardsDeck.map(Card.fromPrimitives),
         );
     }
 
@@ -54,10 +63,24 @@ export class Match {
         else player.status = new PlayerStatus(PlayerStatusConstants.WAITING_TURN);
     }
 
+    public dealCards(player: Player): void {
+        const requiredCards: number = player.position == 1 ? 11 : 10;
+        for (let i = 0; i < requiredCards; i++) {
+            const random: number = Math.floor(Math.random() * this.cardsDeck.length);
+            if (i < 3) player.terna1.push(this.cardsDeck[random]);
+            else if (i < 6) player.terna2.push(this.cardsDeck[random]);
+            else if (i < 10) player.cuarta.push(this.cardsDeck[random]);
+            else player.sobrante = this.cardsDeck[random];
+            this.cardsDeck.splice(random, 1);
+        }
+    }
+
     public toPrimitives(): MatchDto {
         return {
+            cardsDeck: this.cardsDeck.map(c => c.toPrimitives()),
             currentPosition: this.currentPosition,
             currentPlayers: this.currentPlayers,
+            discardedCards: this.discardedCards.map(c => c.toPrimitives()),
             gameId: this.gameId.toString(),
             matchId: this.matchId.toString(),
             status: this.status.toString(),

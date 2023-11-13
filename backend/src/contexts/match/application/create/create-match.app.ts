@@ -10,6 +10,7 @@ import {IMatchRepository} from '../../domain/i-match.repository';
 import {SearchPlayersByGameApp} from '../../../player/application/search/by-game/search-players-by-game.app';
 import {Player} from '../../../player/domain/player';
 import {UpdatePlayerApp} from '../../../player/application/update/update-player.app';
+import {DefaultCardsDeck, DefaultCardsDeck2} from '../../../card/domain/cards-deck';
 
 export class CreateMatchApp {
 
@@ -29,7 +30,9 @@ export class CreateMatchApp {
             matchId: MatchId.create().toString(),
             status: MatchStatusConstants.PLAYING,
             turn: 1,
-            currentPlayers
+            currentPlayers,
+            discardedCards: [],
+            cardsDeck: currentPlayers < 4 ? DefaultCardsDeck : DefaultCardsDeck2
         });
     }
 
@@ -37,8 +40,8 @@ export class CreateMatchApp {
         this.logger.log(`[${this.exec.name}] INIT :: ${game.gameId.toString()}`);
         this.validateGame(game);
         const match: Match = CreateMatchApp.map(game.gameId, game.currentPlayers);
+        await this.updatePlayers(match);
         const created: Match = await this.repository.create(match);
-        await this.updatePlayers(created);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return created;
     }
@@ -52,6 +55,7 @@ export class CreateMatchApp {
         const players: Array<Player> = await this.searchPlayersByGameApp.exec(match.gameId);
         for (const player of players) {
             match.selectTurn(turns, player);
+            match.dealCards(player);
             await this.updatePlayerApp.exec(player);
             turns.splice(turns.indexOf(player.position), 1);
         }

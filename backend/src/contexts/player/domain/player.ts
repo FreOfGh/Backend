@@ -10,13 +10,13 @@ export class Player {
     public position: number;
     public readonly playerId: PlayerId;
     public status: PlayerStatus;
+    public readonly terna1: Array<Card>;
+    public readonly terna2: Array<Card>;
+    public readonly cuarta: Array<Card>;
+    public sobrante?: Card;
     private readonly gameId: GameId;
     private readonly userId: UserId;
     private readonly score: number;
-    private readonly terna1?: Array<Card>;
-    private readonly terna2?: Array<Card>;
-    private readonly cuarta?: Array<Card>;
-    private readonly sobrante?: Card;
 
     constructor(
         playerId: PlayerId,
@@ -50,24 +50,24 @@ export class Player {
             payload.position,
             new PlayerStatus(payload.status),
             payload.score,
-            Array.isArray(payload.terna1) ? payload.terna1.map(Card.fromPrimitives) : undefined,
-            Array.isArray(payload.terna2) ? payload.terna2.map(Card.fromPrimitives) : undefined,
-            Array.isArray(payload.cuarta) ? payload.cuarta.map(Card.fromPrimitives) : undefined,
+            payload.terna1.map(Card.fromPrimitives),
+            payload.terna2.map(Card.fromPrimitives),
+            payload.cuarta.map(Card.fromPrimitives),
             payload.sobrante ? Card.fromPrimitives(payload.sobrante) : undefined,
         );
     }
 
     public toPrimitives(): PlayerDto {
         return {
-            cuarta: Array.isArray(this.cuarta) ? this.cuarta.map(c => c.toPrimitives()) : undefined,
+            cuarta: this.cuarta.map(c => c.toPrimitives()),
             gameId: this.gameId.toString(),
             playerId: this.playerId.toString(),
             position: this.position,
             score: this.score,
             sobrante: this.sobrante?.toPrimitives(),
             status: this.status.toString(),
-            terna1: Array.isArray(this.terna1) ? this.terna1.map(c => c.toPrimitives()) : undefined,
-            terna2: Array.isArray(this.terna2) ? this.terna2.map(c => c.toPrimitives()) : undefined,
+            terna1: this.terna1.map(c => c.toPrimitives()),
+            terna2: this.terna2.map(c => c.toPrimitives()),
             userId: this.userId.toString()
 
         };

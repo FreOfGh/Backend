@@ -26,6 +26,9 @@ export class CreatePlayerApp {
             score: 0,
             status: PlayerStatusConstants.WAITING_GAME,
             userId: userId.toString(),
+            terna1: [],
+            terna2: [],
+            cuarta: [],
         });
     }
 

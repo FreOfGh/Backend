@@ -10,7 +10,7 @@ type Player = DocumentBase<PlayerDto>;
 const definition: SchemaDefinitionType<Player> = {
     cuarta: {
         type: [CardSchema],
-        required: false,
+        required: true,
     },
     gameId: {
         type: String,
@@ -41,11 +41,11 @@ const definition: SchemaDefinitionType<Player> = {
     },
     terna1: {
         type: [CardSchema],
-        required: false,
+        required: true,
     },
     terna2: {
         type: [CardSchema],
-        required: false,
+        required: true,
     },
     userId: {
         type: String,

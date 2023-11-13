@@ -8,8 +8,8 @@ export class PlayerDto {
     @ApiProperty() position: number;
     @ApiProperty() status: string;
     @ApiProperty() score: number;
-    @ApiProperty() terna1?: Array<CardDto>;
-    @ApiProperty() terna2?: Array<CardDto>;
-    @ApiProperty() cuarta?: Array<CardDto>;
+    @ApiProperty() terna1: Array<CardDto>;
+    @ApiProperty() terna2: Array<CardDto>;
+    @ApiProperty() cuarta: Array<CardDto>;
     @ApiProperty() sobrante?: CardDto;
 }
