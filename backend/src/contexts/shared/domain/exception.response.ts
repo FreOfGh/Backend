@@ -1,6 +1,6 @@
-import { HttpStatus } from '@nestjs/common';
-import { ExceptionMessagesConstants } from './exception-messages.constants';
-import { Exception } from './exception';
+import {HttpStatus} from '@nestjs/common';
+import {ExceptionMessagesConstants} from './exception-messages.constants';
+import {Exception} from './exception';
 
 export class ExceptionResponse {
     public message: string = ExceptionMessagesConstants.INTERNAL_SERVER_ERROR;
@@ -16,5 +16,9 @@ export class ExceptionResponse {
 
     public setMessage = (message?: string): void => {
         if (message) this.message = message;
+    };
+
+    public setStatus = (status?: number): void => {
+        if (status) this.code = status;
     };
 }

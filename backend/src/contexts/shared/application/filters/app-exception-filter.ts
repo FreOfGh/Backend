@@ -1,8 +1,8 @@
-import { Response } from 'express';
-import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { ExceptionResponse } from '../../domain/exception.response';
-import { HttpArgumentsHost, RpcArgumentsHost, WsArgumentsHost } from '@nestjs/common/interfaces';
-import { Exception } from '../../domain/exception';
+import {Response} from 'express';
+import {ArgumentsHost, Catch, ExceptionFilter, HttpException} from '@nestjs/common';
+import {ExceptionResponse} from '../../domain/exception.response';
+import {HttpArgumentsHost, RpcArgumentsHost, WsArgumentsHost} from '@nestjs/common/interfaces';
+import {Exception} from '../../domain/exception';
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {
@@ -30,6 +30,7 @@ export class AppExceptionFilter implements ExceptionFilter {
         } else {
             const response: ExceptionResponse = new ExceptionResponse();
             response.setMessage(AppExceptionFilter.resolveMessage(exception));
+            response.setStatus(exception instanceof HttpException ? exception.getStatus() : null);
             this.setExceptionResponse(host, response);
         }
     }

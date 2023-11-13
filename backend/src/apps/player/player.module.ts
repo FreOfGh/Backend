@@ -19,10 +19,14 @@ import {UpdatePlayerAppProvider} from '../../contexts/player/application/update/
 import {
     SearchStartPlayerAppProvider
 } from '../../contexts/player/application/search/start/search-start-player.app.provider';
+import {SearchPlayersByGameController} from './controllers/search/by-game/search-players-by-game.controller';
 
 @Module({
     imports: [
         SharedModule,
+    ],
+    controllers: [
+        SearchPlayersByGameController,
     ],
     providers: [
         PlayerDocumentProvider,
