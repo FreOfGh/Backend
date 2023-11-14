@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
+
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Agbalumo;
     line-height: 1.5;
     font-weight: 400;
+    color: #47525E;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
@@ -9,6 +12,7 @@
 
 body {
     margin: 0;
+    max-width: 100vw;
     min-width: 320px;
     min-height: 100vh;
 }
