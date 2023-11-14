@@ -1,6 +1,6 @@
 import {AppController} from '../../../shared/controllers/app.controller';
 import {Body, Controller, Post, UseGuards} from '@nestjs/common';
-import {GameConfigConstants} from '../../config/game-config.constants';
+import {GameConfigConstants} from '../../config/game.config.constants';
 import {ApiAcceptedResponse, ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {JwtGuard} from '../../../../contexts/user/infrastructure/passport/jwt.guard';
 import {CreateGameControllerResponse} from './create-game.controller.response';

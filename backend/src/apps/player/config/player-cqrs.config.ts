@@ -8,6 +8,9 @@ import {ThrowCardCommandHandler} from '../../../contexts/player/application/thro
 import {
     PullCardFromDeckCommandHandler
 } from '../../../contexts/player/application/pull-card/from-deck/pull-card-from-deck.command-handler';
+import {
+    PullCardFromDiscardedCommandHandler
+} from '../../../contexts/player/application/pull-card/from-discarded/pull-card-from-discarded.command-handler';
 
 const QueryHandlers = [
     SearchPlayerByUserQueryHandler,
@@ -17,6 +20,7 @@ const QueryHandlers = [
 const CommandHandlers = [
     ThrowCardCommandHandler,
     PullCardFromDeckCommandHandler,
+    PullCardFromDiscardedCommandHandler,
 ];
 
 export const PlayerCqrsConfig = [

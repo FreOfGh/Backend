@@ -78,6 +78,10 @@ export class Match {
         this.cardsDeck.splice(random, 1);
     }
 
+    public pullFromDiscarded(player: Player): void {
+        player.sobrante = this.discardedCards.pop();
+    }
+
     public toPrimitives(): MatchDto {
         return {
             cardsDeck: this.cardsDeck.map(c => c.toPrimitives()),

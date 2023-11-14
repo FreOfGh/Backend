@@ -28,6 +28,12 @@ import {PullCardFromDeckController} from './controllers/pull-card/from-deck/pull
 import {
     PullCardFromDeckAppProvider
 } from '../../contexts/player/application/pull-card/from-deck/pull-card-from-deck.app.provider';
+import {
+    PullCardFromDiscardedAppProvider
+} from '../../contexts/player/application/pull-card/from-discarded/pull-card-from-discarded.app.provider';
+import {
+    PullCardFromDiscardedController
+} from './controllers/pull-card/from-discarded/pull-card-from-discarded.controller';
 
 @Module({
     imports: [
@@ -37,6 +43,7 @@ import {
     ],
     controllers: [
         PullCardFromDeckController,
+        PullCardFromDiscardedController,
         SearchPlayersByGameController,
     ],
     providers: [
@@ -50,6 +57,7 @@ import {
         SearchPlayerByPositionAppProvider,
         ThrowCardAppProvider,
         PullCardFromDeckAppProvider,
+        PullCardFromDiscardedAppProvider,
     ],
     exports: [
         SearchPlayerByUserQueryHandler,
@@ -57,6 +65,7 @@ import {
         CreatePlayerAppProvider,
         SearchPlayersByGameAppProvider,
         UpdatePlayerAppProvider,
+        SearchPlayerByUserAppProvider,
         SearchPlayerByPositionAppProvider,
     ]
 })

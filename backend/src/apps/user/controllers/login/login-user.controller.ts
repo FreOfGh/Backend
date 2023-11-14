@@ -1,6 +1,6 @@
 import {Controller, Post, UseGuards} from '@nestjs/common';
 import {AppController} from '../../../shared/controllers/app.controller';
-import {UserConfigConstants} from '../../config/user-config.constants';
+import {UserConfigConstants} from '../../config/user.config.constants';
 import {ApiAcceptedResponse, ApiBody, ApiTags} from '@nestjs/swagger';
 import {LoginGuard} from '../../../../contexts/user/infrastructure/passport/login.guard';
 import {User} from '../../../../contexts/user/domain/user.decorator';

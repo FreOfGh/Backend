@@ -1,6 +1,6 @@
 import {AppController} from '../../../../shared/controllers/app.controller';
 import {Controller, Get, UseGuards} from '@nestjs/common';
-import {UserConfigConstants} from '../../../config/user-config.constants';
+import {UserConfigConstants} from '../../../config/user.config.constants';
 import {ApiAcceptedResponse, ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {JwtGuard} from '../../../../../contexts/user/infrastructure/passport/jwt.guard';
 import {SearchUserByIdControllerResponse} from './search-user-by-id.controller.response';

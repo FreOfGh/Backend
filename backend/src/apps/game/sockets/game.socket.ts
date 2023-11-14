@@ -1,6 +1,6 @@
 import {AppSocket} from '../../shared/sockets/app.socket';
 import {SubscribeMessage, WebSocketGateway, WebSocketServer} from '@nestjs/websockets';
-import {GameConfigConstants} from '../config/game-config.constants';
+import {GameConfigConstants} from '../config/game.config.constants';
 import {Server, Socket} from 'socket.io';
 import {Logger, UseFilters, UseGuards} from '@nestjs/common';
 import {CommandBus, QueryBus} from '@nestjs/cqrs';

@@ -1,8 +1,8 @@
 import {AppController} from '../../../../shared/controllers/app.controller';
 import {Body, Controller, Patch, UseGuards} from '@nestjs/common';
-import {UserConfigConstants} from '../../../config/user-config.constants';
+import {UserConfigConstants} from '../../../config/user.config.constants';
 import {ApiAcceptedResponse, ApiBearerAuth, ApiTags} from '@nestjs/swagger';
-import {GameConfigConstants} from '../../../../game/config/game-config.constants';
+import {GameConfigConstants} from '../../../../game/config/game.config.constants';
 import {JwtGuard} from '../../../../../contexts/user/infrastructure/passport/jwt.guard';
 import {UpdateUserCardDesignControllerResponse} from './update-user-card-design.controller.response';
 import {UpdateUserCardDesignControllerRequest} from './update-user-card-design.controller.request';

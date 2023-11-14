@@ -1,6 +1,6 @@
 import {AppController} from '../../../../shared/controllers/app.controller';
 import {Controller, Get, UseGuards} from '@nestjs/common';
-import {CardDesignConfigConstants} from '../../../config/card-design-config.constants';
+import {CardDesignConfigConstants} from '../../../config/card-design.config.constants';
 import {ApiAcceptedResponse, ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {JwtGuard} from '../../../../../contexts/user/infrastructure/passport/jwt.guard';
 import {SearchActiveCardDesignsControllerResponse} from './search-active-card-designs.controller.response';
