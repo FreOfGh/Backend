@@ -11,11 +11,11 @@ export class Match {
 
     public readonly gameId: GameId;
     public readonly matchId: MatchId;
-    public readonly discardedCards: Array<Card>;
+    public discardedCards: Array<Card>;
     public readonly currentPlayers: number;
     public turn: number;
     private readonly status: MatchStatus;
-    private readonly cardsDeck: Array<Card>;
+    private cardsDeck: Array<Card>;
 
 
     constructor(
@@ -71,6 +71,13 @@ export class Match {
         }
     }
 
+    public pullFromDesk(player: Player): void {
+        if (this.cardsDeck.length == 0) this.recoverCardsFromDiscarded();
+        const random: number = Math.floor(Math.random() * this.cardsDeck.length);
+        player.sobrante = this.cardsDeck[random];
+        this.cardsDeck.splice(random, 1);
+    }
+
     public toPrimitives(): MatchDto {
         return {
             cardsDeck: this.cardsDeck.map(c => c.toPrimitives()),
@@ -81,5 +88,11 @@ export class Match {
             status: this.status.toString(),
             turn: this.turn,
         };
+    }
+
+    private recoverCardsFromDiscarded(): void {
+        const last: Card = this.discardedCards.pop();
+        this.cardsDeck = [...this.discardedCards];
+        this.discardedCards = [last];
     }
 }

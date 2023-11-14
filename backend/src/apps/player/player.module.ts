@@ -24,6 +24,10 @@ import {ThrowCardCommandHandler} from '../../contexts/player/application/throw-c
 import {ThrowCardAppProvider} from '../../contexts/player/application/throw-card/throw-card.app.provider';
 import {MatchModule} from '../match/match.module';
 import {GameModule} from '../game/game.module';
+import {PullCardFromDeckController} from './controllers/pull-card/from-deck/pull-card-from-deck.controller';
+import {
+    PullCardFromDeckAppProvider
+} from '../../contexts/player/application/pull-card/from-deck/pull-card-from-deck.app.provider';
 
 @Module({
     imports: [
@@ -32,6 +36,7 @@ import {GameModule} from '../game/game.module';
         forwardRef(() => GameModule),
     ],
     controllers: [
+        PullCardFromDeckController,
         SearchPlayersByGameController,
     ],
     providers: [
@@ -44,6 +49,7 @@ import {GameModule} from '../game/game.module';
         UpdatePlayerAppProvider,
         SearchPlayerByPositionAppProvider,
         ThrowCardAppProvider,
+        PullCardFromDeckAppProvider,
     ],
     exports: [
         SearchPlayerByUserQueryHandler,

@@ -5,6 +5,9 @@ import {
     SearchPlayersByGameQueryHandler
 } from '../../../contexts/player/application/search/by-game/search-players-by-game.query-handler';
 import {ThrowCardCommandHandler} from '../../../contexts/player/application/throw-card/throw-card.command-handler';
+import {
+    PullCardFromDeckCommandHandler
+} from '../../../contexts/player/application/pull-card/from-deck/pull-card-from-deck.command-handler';
 
 const QueryHandlers = [
     SearchPlayerByUserQueryHandler,
@@ -12,7 +15,8 @@ const QueryHandlers = [
 ];
 
 const CommandHandlers = [
-    ThrowCardCommandHandler
+    ThrowCardCommandHandler,
+    PullCardFromDeckCommandHandler,
 ];
 
 export const PlayerCqrsConfig = [

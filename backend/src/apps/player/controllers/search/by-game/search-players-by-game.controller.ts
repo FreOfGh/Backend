@@ -1,7 +1,7 @@
 import {AppController} from '../../../../shared/controllers/app.controller';
 import {Controller, Get, Query, UseGuards} from '@nestjs/common';
 import {PlayerConfigConstants} from '../../../config/player-config.constants';
-import {ApiAcceptedResponse, ApiTags} from '@nestjs/swagger';
+import {ApiAcceptedResponse, ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {JwtGuard} from '../../../../../contexts/user/infrastructure/passport/jwt.guard';
 import {SearchPlayersByGameControllerResponse} from './search-players-by-game.controller.response';
 import {SearchPlayersByGameControllerRequest} from './search-players-by-game.controller.request';
@@ -12,6 +12,7 @@ import {
 
 @Controller(PlayerConfigConstants.CONTROLLER_PREFIX)
 @ApiTags(PlayerConfigConstants.API_TAG)
+@ApiBearerAuth()
 export class SearchPlayersByGameController extends AppController {
 
     @Get(PlayerConfigConstants.SEARCH_PLAYERS_BY_GAME)
