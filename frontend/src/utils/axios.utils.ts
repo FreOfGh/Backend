@@ -7,9 +7,18 @@ export class AxiosUtils {
         return axios.post(url, body, this.buildConfig());
     }
 
-    private static buildConfig(): AxiosRequestConfig {
+    public static get<T, R>(url: BackendConstants, params?: R, token?: string): Promise<{ data: T }> {
+        const config = this.buildConfig(token);
+        if (params) config.params = params;
+        return axios.get(url, config);
+    }
+
+    private static buildConfig(token?: string): AxiosRequestConfig {
         return {
             baseURL: import.meta.env.VITE_BACKEND_URL,
+            headers: {
+                authorization: token ? `Bearer ${token}` : undefined
+            }
         }
     }
 }

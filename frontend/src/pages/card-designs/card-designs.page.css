@@ -1,0 +1,29 @@
+#card-designs-page-container {
+    min-height: 100vh;
+    background-color: #EBEBEB;
+    display: grid;
+    grid-template-rows: max-content max-content 1fr;
+    row-gap: 3%;
+}
+
+#card-designs-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2%;
+}
+
+.card-designs-img-card {
+    margin: 5px;
+    width: 90px;
+}
+
+.card-designs-page-button-container {
+    width: 15%;
+}
+
+.card-designs-page-button {
+    width: 100%;
+    background-color: #13CE66 !important;
+    color: black !important;
+}

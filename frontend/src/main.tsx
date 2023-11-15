@@ -7,6 +7,7 @@ import {RoutesConstants} from "./constants/routes.constants.ts";
 import HomePage from "./pages/home/home.page.tsx";
 import {PrincipalPage} from "./pages/principal/principal.page.tsx";
 import {SessionStorageConstants} from "./constants/session-storage.constants.ts";
+import CardDesignsPage from "./pages/card-designs/card-designs.page.tsx";
 
 
 const theme = createTheme({
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <BrowserRouter>
                 <Routes>
                     <Route path={RoutesConstants.GAME} element={<Guard element={<p>Game</p>}/>}></Route>
+                    <Route path={RoutesConstants.CARD_DESIGNS} element={<Guard element={<CardDesignsPage/>}/>}></Route>
                     <Route path={RoutesConstants.PRINCIPAL} element={<Guard element={<PrincipalPage/>}/>}></Route>
                     <Route path={RoutesConstants.HOME} element={<HomePage/>}></Route>
                     <Route path='*' element={<Navigate to={RoutesConstants.HOME} replace/>}/>

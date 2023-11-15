@@ -25,6 +25,10 @@ const definition: SchemaDefinitionType<CardDesign> = {
         type: String,
         required: true,
     },
+    title: {
+        type: String,
+        required: true,
+    }
 };
 
 export const CardDesignSchema = new Schema(definition, {timestamps: false});
