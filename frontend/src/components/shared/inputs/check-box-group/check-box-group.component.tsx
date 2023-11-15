@@ -13,7 +13,12 @@ const theme = createTheme({
     }
 });
 
-function CheckBoxGroupComponent(props: { fromLabel: string, values: Array<{ value: any, label: string }> }) {
+function CheckBoxGroupComponent<T>(props: {
+    fromLabel: string,
+    selected: T,
+    setSelected(param: T): void,
+    values: Array<{ value: T, label: string }>
+}) {
     return (
         <FormControl>
             <ThemeProvider theme={theme}>
@@ -21,11 +26,13 @@ function CheckBoxGroupComponent(props: { fromLabel: string, values: Array<{ valu
             </ThemeProvider>
             <RadioGroup
                 row
+                value={props.selected}
+                onChange={(e) => props.setSelected(e.target.value as T)}
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
             >
                 {props.values.map((v) => {
-                    return <FormControlLabel key={v.value} value={v.value} control={<Radio sx={{
+                    return <FormControlLabel key={v.label} value={v.value} control={<Radio sx={{
                         '&, &.Mui-checked': {
                             color: '#0fbd5c',
                         }
