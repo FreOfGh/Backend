@@ -7,6 +7,10 @@ export class AxiosUtils {
         return axios.post(url, body, this.buildConfig());
     }
 
+    public static patch<T, R>(url: BackendConstants, body: R, token?: string): Promise<{ data: T }> {
+        return axios.patch(url, body, this.buildConfig(token));
+    }
+
     public static get<T, R>(url: BackendConstants, params?: R, token?: string): Promise<{ data: T }> {
         const config = this.buildConfig(token);
         if (params) config.params = params;

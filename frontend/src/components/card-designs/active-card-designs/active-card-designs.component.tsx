@@ -13,6 +13,7 @@ function ActiveCardDesignsComponent(props: {
     setLoading: (param: boolean) => (void),
     setAlertMessage: (param: string) => (void),
     setSelectedDesign: (param: string) => (void),
+    setSelectedId: (param: string | null) => (void),
 }) {
     const [data, setData] = useState<Array<CardDesign> | null>(null);
     const [error, setError] = useState<boolean>(false);
@@ -47,7 +48,10 @@ function ActiveCardDesignsComponent(props: {
                                 <div className={"active-card-design-select-button-container"}>
                                     <Button className={"active-card-design-page-button"}
                                             variant="contained"
-                                            onClick={() => props.setSelectedDesign(cD.name)}>Seleccionar</Button>
+                                            onClick={() => {
+                                                props.setSelectedDesign(cD.name);
+                                                props.setSelectedId(cD.cardDesignId);
+                                            }}>Seleccionar</Button>
                                 </div>
                                 <img alt={"Error"}
                                      className={"card-designs-img-card card-design-img-card-active-card"}
