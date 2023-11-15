@@ -26,12 +26,17 @@ function ActiveCardDesignsComponent(props: {
                 const {data} = await AxiosUtils.get<ActiveCardDesignsResponse, never>(BackendConstants.ACTIVE_CARD_DESIGNS_URL, undefined, token)
                 setData(data.data);
                 props.setLoading(false);
-            } catch (error) {
-                setError(true);
-                props.setLoading(false);
-                props.setAlertMessage(AlertMessagesConstants.CANNOT_GET_ACTIVE_CARD_DESIGNS)
+            } catch (err) {
+                AxiosUtils.mapError(err as ErrorResponse, mapErrorsGettingActive)
             }
         }
+
+        const mapErrorsGettingActive = (): void | boolean => {
+            setError(true);
+            props.setLoading(false);
+            props.setAlertMessage(AlertMessagesConstants.CANNOT_GET_ACTIVE_CARD_DESIGNS)
+        }
+
 
         fetchData();
     }, []);

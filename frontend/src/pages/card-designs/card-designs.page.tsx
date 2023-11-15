@@ -44,10 +44,12 @@ function CardDesignsPage() {
                 setLoading(false);
                 handleSetAlertMessage(AlertMessagesConstants.CARD_DESIGN_CHANGED, AlertMessagesConstants.SUCCESS_ALERT);
             })
-            .catch((err: ErrorResponse) => {
-                setLoading(false);
-                handleSetAlertMessage(AlertsUtils.resolveMessage(err.response.data.message));
-            });
+            .catch((err: ErrorResponse) => AxiosUtils.mapError(err, mapSetDesignErrors));
+    }
+
+    const mapSetDesignErrors = (err: ErrorResponse): void | boolean => {
+        setLoading(false);
+        handleSetAlertMessage(AlertsUtils.resolveMessage(err.response.data.message));
     }
 
     return (

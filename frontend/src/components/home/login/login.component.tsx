@@ -40,10 +40,12 @@ function LoginComponent(props: {
                 props.setLoading(false);
                 setRedirect(true);
             })
-            .catch((err: ErrorResponse) => {
-                props.setLoading(false);
-                handleSetAlertMessage(AlertsUtils.resolveMessage(err.response.data.message));
-            });
+            .catch((err: ErrorResponse) => AxiosUtils.mapError(err, mapErrorsLogin, false));
+    }
+
+    const mapErrorsLogin = (err: ErrorResponse): void | boolean => {
+        props.setLoading(false);
+        handleSetAlertMessage(AlertsUtils.resolveMessage(err.response.data.message));
     }
 
     return (
