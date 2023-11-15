@@ -32,14 +32,9 @@
     text-decoration: none;
 }
 
-#login-component-send-link {
-    width: 60%;
-    height: max-content;
-}
-
 #login-component-send-button {
     height: 40px;
     background-color: #13CE66;
     color: black;
-    width: 100%;
+    width: 60%;
 }

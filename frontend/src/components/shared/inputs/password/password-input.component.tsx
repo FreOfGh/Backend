@@ -25,7 +25,12 @@ const theme = createTheme({
 });
 
 
-export function PasswordInputComponent(props: { className: string, labelName?: string }) {
+export function PasswordInputComponent(props: {
+    className: string,
+    value?: string,
+    setPassword: (param: string) => (void),
+    labelName?: string
+}) {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,8 +49,9 @@ export function PasswordInputComponent(props: { className: string, labelName?: s
                 </InputLabel>
             </ThemeProvider>
             <FilledInput
-                id="outlined-adornment-password"
                 type={showPassword ? 'text' : 'password'}
+                value={props.value}
+                onChange={(e) => props.setPassword(e.target.value)}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton

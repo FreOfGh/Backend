@@ -1,7 +1,11 @@
 import './principal-header.component.css';
 import {Button, ButtonGroup} from "@mui/material";
+import User from "../../../types/models/user.ts";
+import {SessionStorageConstants} from "../../../constants/session-storage.constants.ts";
 
 function PrincipalHeaderComponent() {
+    const user: User = JSON.parse(sessionStorage.getItem(SessionStorageConstants.USER) as string);
+
     return (
         <div id={"principal-header-container"}>
             <div id={"principal-header-buttons-container"}>
@@ -22,7 +26,7 @@ function PrincipalHeaderComponent() {
             </div>
             <div id={"principal-header-info"}>
                 <div id={"principal-header-info-image"}></div>
-                <h2 id={"principal-header-info-tokens"}>1000</h2>
+                <h2 id={"principal-header-info-tokens"}>{user.tokens}</h2>
             </div>
         </div>
     )

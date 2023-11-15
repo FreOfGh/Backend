@@ -15,7 +15,7 @@ export function PrincipalPage() {
             <div id={"principal-page-line-container"}>
                 <div id={"principal-page-line"}></div>
             </div>
-            <div>
+            <div id={"principal-page-join-game"}>
                 <JoinGameComponent></JoinGameComponent>
             </div>
         </div>

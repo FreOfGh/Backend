@@ -21,3 +21,33 @@
     height: 90%;
     width: 100%;
 }
+
+@media (max-width: 830px) {
+    #principal-page-container {
+        height: max-content;
+        min-height: 100vh;
+        grid-template-rows: 110px 1fr 5% 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    #principal-page-header {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    #principal-page-line-container {
+        grid-row: 3/4;
+        grid-column: 1/2;
+        justify-content: center;
+    }
+
+    #principal-page-line {
+        height: 2%;
+        width: 90%;
+    }
+
+    #principal-page-join-game {
+        grid-column: 1/2;
+        grid-row: 4/5;
+    }
+}

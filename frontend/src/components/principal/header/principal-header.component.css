@@ -48,3 +48,12 @@
     margin: 0;
 }
 
+@media (max-width: 830px) {
+    #principal-header-container {
+        grid-template-columns: 100%
+    }
+
+    #principal-header-info {
+        display: none;
+    }
+}

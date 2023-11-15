@@ -79,3 +79,10 @@
     background-color: #13CE66 !important;
     color: black !important;
 }
+
+@media (max-width: 830px) {
+    #join-game-component-container {
+        height: max-content;
+        grid-template-rows: 120px 430px 100px;
+    }
+}

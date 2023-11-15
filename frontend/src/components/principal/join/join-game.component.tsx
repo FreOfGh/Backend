@@ -43,7 +43,20 @@ function JoinGameComponent() {
             requiredPlayers: 10,
             totalPlayers: 6,
         },
-
+        {
+            id: "5",
+            name: 'Test 5',
+            totalDue: 1000,
+            requiredPlayers: 10,
+            totalPlayers: 6,
+        },
+        {
+            id: "5",
+            name: 'Test 5',
+            totalDue: 1000,
+            requiredPlayers: 10,
+            totalPlayers: 6,
+        },
     ]
 
     return (

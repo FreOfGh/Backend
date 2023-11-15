@@ -25,7 +25,7 @@ function CheckBoxGroupComponent(props: { fromLabel: string, values: Array<{ valu
                 name="row-radio-buttons-group"
             >
                 {props.values.map((v) => {
-                    return <FormControlLabel value={v.value} control={<Radio sx={{
+                    return <FormControlLabel key={v.value} value={v.value} control={<Radio sx={{
                         '&, &.Mui-checked': {
                             color: '#0fbd5c',
                         }
