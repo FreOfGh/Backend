@@ -27,7 +27,11 @@ function HomePage() {
                 <div id={"home-page-line"}></div>
             </div>
             <div id={"home-page-register"}>
-                <RegisterComponent></RegisterComponent>
+                <RegisterComponent
+                    setLoading={setLoading}
+                    setAlertType={setAlertType}
+                    setAlertMessage={setAlertMessage}
+                ></RegisterComponent>
             </div>
             <LoadingComponent loading={loading}></LoadingComponent>
             <AlertComponent
