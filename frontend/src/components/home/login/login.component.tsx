@@ -1,6 +1,8 @@
 import './login.component.css';
 import {Button, TextField} from "@mui/material";
 import {PasswordInputComponent} from "../../shared/inputs/password/password-input.component.tsx";
+import {Link} from "react-router-dom";
+import {RoutesConstants} from "../../../constants/routes.constants.ts";
 
 
 function LoginComponent() {
@@ -19,7 +21,9 @@ function LoginComponent() {
                 <PasswordInputComponent className={"login-component-form-input"}></PasswordInputComponent>
             </form>
             <div id={"login-component-send-container"}>
+                <Link to={RoutesConstants.PRINCIPAL} id={"login-component-send-link"} >
                 <Button id={"login-component-send-button"} variant="contained">Ingresar</Button>
+            </Link>
             </div>
         </div>
     )

@@ -29,11 +29,17 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    text-decoration: none;
+}
+
+#register-component-send-link {
+    width: 60%;
+    height: max-content;
 }
 
 #register-component-send-button {
     height: 40px;
     background-color: #13CE66;
     color: black;
-    width: 60%;
+    width: 100%;
 }

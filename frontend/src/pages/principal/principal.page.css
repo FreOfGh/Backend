@@ -1,0 +1,23 @@
+#principal-page-container {
+    height: 100vh;
+    background-color: #EBEBEB;
+    display: grid;
+    grid-template-rows: 15% 85%;
+    grid-template-columns: 49.8% 0.04% 49.8%;
+}
+
+#principal-page-header {
+    grid-column: 1/4;
+    grid-row: 1/2;
+}
+
+#principal-page-line-container {
+    display: flex;
+    align-items: center;
+}
+
+#principal-page-line {
+    background-color: #47525E;
+    height: 90%;
+    width: 100%;
+}

@@ -1,8 +1,10 @@
 import './register.component.css';
 import {Button, TextField} from "@mui/material";
 import {PasswordInputComponent} from "../../shared/inputs/password/password-input.component.tsx";
+import {RoutesConstants} from "../../../constants/routes.constants.ts";
+import {Link} from "react-router-dom";
 
-export function RegisterComponent() {
+function RegisterComponent() {
     return (
         <div id={"register-component-container"}>
             <div><h1 id={"register-component-tittle"}>Registrarse</h1></div>
@@ -15,11 +17,16 @@ export function RegisterComponent() {
                     InputLabelProps={{style: {color: '#47525E'}}}
                 />
                 <PasswordInputComponent className={"register-component-form-input"}></PasswordInputComponent>
-                <PasswordInputComponent className={"register-component-form-input"} labelName={"Confirmar contraseña"}></PasswordInputComponent>
+                <PasswordInputComponent className={"register-component-form-input"}
+                                        labelName={"Confirmar contraseña"}></PasswordInputComponent>
             </form>
             <div id={"register-component-send-container"}>
-                <Button id={"register-component-send-button"} variant="contained">Confirmar</Button>
+                <Link to={RoutesConstants.PRINCIPAL} id={"register-component-send-link"}>
+                    <Button id={"register-component-send-button"} variant="contained">Confirmar</Button>
+                </Link>
             </div>
         </div>
     )
 }
+
+export default RegisterComponent;

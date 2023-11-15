@@ -1,6 +1,6 @@
 import LoginComponent from "../../components/home/login/login.component.tsx";
 import './home.page.css';
-import {RegisterComponent} from "../../components/home/register/register.component.tsx";
+import RegisterComponent from "../../components/home/register/register.component.tsx";
 
 function HomePage() {
     return (
