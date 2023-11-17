@@ -7,9 +7,10 @@ import {GameEventsConstants} from '../../../domain/game-events.constants';
 import {UpdateGameApp} from '../../update/update-game.app';
 import {GameStatusConstants} from '../../../domain/game-status.constants';
 import {GameStatus} from '../../../domain/game-status';
-import {GameAlreadyStartedException} from '../../../domain/exceptions/game-already-started.exception';
 import {CreateMatchApp} from '../../../../match/application/create/create-match.app';
-import {SearchPlayerByPositionApp} from '../../../../player/application/search/by-position/search-player-by-position.app';
+import {
+    SearchPlayerByPositionApp
+} from '../../../../player/application/search/by-position/search-player-by-position.app';
 import {Player} from '../../../../player/domain/player';
 
 export class JoinGameRoomApp {
@@ -28,7 +29,7 @@ export class JoinGameRoomApp {
     public async exec(gameId: GameId): Promise<void> {
         this.logger.log(`[${this.exec.name}] INIT :: gameId: ${gameId.toString()}`);
         const game: Game = await this.searchGameByIdApp.exec(gameId);
-        if (game.status.toString() !== GameStatusConstants.WAITING_PLAYERS) throw new GameAlreadyStartedException();
+        if (game.status.toString() !== GameStatusConstants.WAITING_PLAYERS) return;
         if (game.requiredPlayers === game.totalPlayers) {
             const updated: Game = await this.updateGame(game);
             await this.crateMatchApp.exec(updated);

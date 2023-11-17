@@ -34,6 +34,7 @@ import {
 import {
     PullCardFromDiscardedController
 } from './controllers/pull-card/from-discarded/pull-card-from-discarded.controller';
+import {SearchPlayerByUserController} from './controllers/search/by-user/search-player-by-user.controller';
 
 @Module({
     imports: [
@@ -45,6 +46,7 @@ import {
         PullCardFromDeckController,
         PullCardFromDiscardedController,
         SearchPlayersByGameController,
+        SearchPlayerByUserController,
     ],
     providers: [
         PlayerDocumentProvider,

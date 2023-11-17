@@ -6,6 +6,7 @@ import LoadingComponent from "../../components/shared/loading/loading.component.
 import {useState} from "react";
 import AlertMessagesConstants from "../../constants/alert-messages.constants.ts";
 import AlertComponent from "../../components/shared/alert/alert.component.tsx";
+import BuyTokensComponent from "../../components/principal/buy-tokens/buy-tokens.component.tsx";
 
 export function PrincipalPage() {
 
@@ -14,6 +15,7 @@ export function PrincipalPage() {
     const [loadingCreateGame, setLoadingCreateGame] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState(AlertMessagesConstants.WARNING_ALERT as string);
+    const [openTokens, setOpenTokens] = useState(false);
 
     return (
         <div id={"principal-page-container"}>
@@ -21,6 +23,7 @@ export function PrincipalPage() {
                 <PrincipalHeaderComponent
                     loading={loadingUser}
                     setLoading={setLoadingUser}
+                    setOpenTokens={setOpenTokens}
                 ></PrincipalHeaderComponent>
             </div>
             <div>
@@ -34,7 +37,10 @@ export function PrincipalPage() {
                 <div id={"principal-page-line"}></div>
             </div>
             <div id={"principal-page-join-game"}>
-                <JoinGameComponent></JoinGameComponent>
+                <JoinGameComponent
+                    setLoading={setloadingPublicGames}
+                    loading={loadingPublicGames}
+                ></JoinGameComponent>
             </div>
             <LoadingComponent loading={loadingPublicGames || loadingUser || loadingCreateGame}></LoadingComponent>
             <AlertComponent
@@ -42,6 +48,7 @@ export function PrincipalPage() {
                 type={alertType}
                 setAlertMessage={setAlertMessage}
             />
+            <BuyTokensComponent open={openTokens} handleOpen={setOpenTokens}></BuyTokensComponent>
         </div>
     )
 }

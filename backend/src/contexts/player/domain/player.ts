@@ -16,12 +16,18 @@ export class Player {
     public sobrante?: Card;
     public readonly gameId: GameId;
     private readonly userId: UserId;
+    private readonly username: string;
+    private readonly userIcon: string;
+    private readonly userDesign: string;
     private readonly score: number;
 
     constructor(
         playerId: PlayerId,
         gameId: GameId,
         userId: UserId,
+        username: string,
+        userIcon: string,
+        userDesign: string,
         position: number,
         status: PlayerStatus,
         score: number,
@@ -33,6 +39,9 @@ export class Player {
         this.playerId = playerId;
         this.gameId = gameId;
         this.userId = userId;
+        this.username = username;
+        this.userIcon = userIcon;
+        this.userDesign = userDesign;
         this.position = position;
         this.status = status;
         this.score = score;
@@ -47,6 +56,9 @@ export class Player {
             new PlayerId(payload.playerId),
             new GameId(payload.gameId),
             new UserId(payload.userId),
+            payload.username,
+            payload.userIcon,
+            payload.userDesign,
             payload.position,
             new PlayerStatus(payload.status),
             payload.score,
@@ -68,8 +80,10 @@ export class Player {
             status: this.status.toString(),
             terna1: this.terna1.map(c => c.toPrimitives()),
             terna2: this.terna2.map(c => c.toPrimitives()),
-            userId: this.userId.toString()
-
+            userId: this.userId.toString(),
+            username: this.username,
+            userIcon: this.userIcon,
+            userDesign: this.userDesign,
         };
     }
 }

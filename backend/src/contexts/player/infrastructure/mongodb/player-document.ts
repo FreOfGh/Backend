@@ -52,6 +52,18 @@ const definition: SchemaDefinitionType<Player> = {
         required: true,
         index: true,
     },
+    username: {
+        type: String,
+        required: true,
+    },
+    userIcon: {
+        type: String,
+        required: true,
+    },
+    userDesign: {
+        type: String,
+        required: true,
+    }
 };
 
 export const PlayerSchema = new Schema(definition);

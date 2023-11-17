@@ -8,9 +8,10 @@ export class User {
     public readonly password: UserPassword;
     public status: UserStatus;
     public readonly userId: UserId;
+    public readonly username: string;
+    public readonly icon: string;
+    public cardDesign: string;
     private tokens: number;
-    private readonly username: string;
-    private cardDesign: string;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 
@@ -21,6 +22,7 @@ export class User {
         cardDesign: string,
         status: UserStatus,
         tokens: number,
+        icon: string,
         createdAt?: Date,
         updatedAt?: Date,
     ) {
@@ -30,6 +32,7 @@ export class User {
         this.cardDesign = cardDesign;
         this.status = status;
         this.tokens = tokens;
+        this.icon = icon;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -42,6 +45,7 @@ export class User {
             payload.cardDesign,
             new UserStatus(payload.status),
             payload.tokens,
+            payload.icon,
             payload.createdAt ? new Date(payload.createdAt) : undefined,
             payload.updatedAt ? new Date(payload.updatedAt) : undefined,
         );
@@ -51,6 +55,7 @@ export class User {
         return {
             cardDesign: this.cardDesign,
             createdAt: this.createdAt,
+            icon: this.icon,
             password: this.password.toString(),
             status: this.status.toString(),
             tokens: this.tokens,

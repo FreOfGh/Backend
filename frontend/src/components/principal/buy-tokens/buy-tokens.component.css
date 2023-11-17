@@ -1,0 +1,32 @@
+#alert-dialog-container {
+    width: 500px;
+    display: grid;
+    column-gap: 0.25%;
+    grid-template-columns: 49% 0.5% 49%;
+}
+
+#buy-tokens-component-line-container {
+    display: flex;
+    align-items: center;
+}
+
+#buy-tokens-component-info {
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+
+#buy-tokens-component-page-line {
+    background-color: #47525E;
+    height: 100%;
+    width: 100%;
+}
+
+.buy-tokens-component-input {
+    width: 80% !important;
+}
+
+.buy-tokens-component-button {
+    width: 50% !important;
+    background-color: #13CE66 !important;
+    color: black !important;
+}

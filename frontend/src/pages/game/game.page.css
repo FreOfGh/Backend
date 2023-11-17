@@ -1,0 +1,6 @@
+#game-page-container {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: max-content 1fr 10%;
+    background-color: #EBEBEB;
+}

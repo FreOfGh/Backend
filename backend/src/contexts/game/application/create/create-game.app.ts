@@ -64,7 +64,7 @@ export class CreateGameApp {
         const code: GameCode = await this.generateCode();
         const game: Game = CreateGameApp.map(userId, requiredPlayers, isPublic, totalBet, name, code);
         const created: Game = await this.repository.create(game);
-        await this.createPlayerApp.exec(userId, game.gameId);
+        await this.createPlayerApp.exec(userId, user.username, user.icon, user.cardDesign, game.gameId);
         await this.updateUser(user, totalBet);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return created;

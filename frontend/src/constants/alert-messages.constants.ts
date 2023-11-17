@@ -14,6 +14,7 @@ enum AlertMessagesConstants {
     TRY_AGAIN_LATER = "Intente más tarde",
     USER_UNAUTHORIZED_ERROR = "Credenciales inválidas",
     CANNOT_GET_ACTIVE_CARD_DESIGNS = "No se pueden obtener los diseños activos",
+    CANNOT_GET_PLAYERS = "No se puede obtener los jugadores",
     CARD_DESIGN_NOT_CHANGE = "El diseño no ha sido cambiado",
     CARD_DESIGN_CHANGED = "El diseño ha sido actualizado"
 }

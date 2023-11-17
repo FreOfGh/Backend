@@ -8,13 +8,14 @@ import {useEffect, useState} from "react";
 import {AxiosUtils} from "../../../utils/axios.utils.ts";
 import GetUserResponse from "../../../types/services/get-user/get-user.response.ts";
 import {BackendConstants} from "../../../constants/backend.constants.ts";
+import TutorialPDF from "../../../assets/documents/tutorial.pdf";
 
 function PrincipalHeaderComponent(props: {
     loading: boolean,
     setLoading: (param: boolean) => (void),
+    setOpenTokens: (param: boolean) => (void),
 }) {
     const [user, setUser] = useState<User | null>(null);
-    const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -27,43 +28,45 @@ function PrincipalHeaderComponent(props: {
                 props.setLoading(false);
             } catch (err) {
                 AxiosUtils.mapError(err as ErrorResponse, () => {
-                        setError(true);
                         props.setLoading(false)
                     }
                 )
             }
         }
+
         fetchData()
     }, []);
 
-    if (error || props.loading) return (<></>)
-    if (user) {
-        return (
-            <div id={"principal-header-container"}>
-                <div id={"principal-header-buttons-container"}>
-                    <ButtonGroup
-                        variant="contained"
-                        id={"principal-header-button-group"}
-                        aria-label="outlined primary button group"
-                    >
-                        <div className={"principal-header-button-container"}>
+    return (
+        <div id={"principal-header-container"}>
+            <div id={"principal-header-buttons-container"}>
+                <ButtonGroup
+                    variant="contained"
+                    id={"principal-header-button-group"}
+                    aria-label="outlined primary button group"
+                >
+                    <div className={"principal-header-button-container"}>
+                        <a href={TutorialPDF} rel="noopener noreferrer" target="_blank">
                             <Button className={"principal-header-button"}>Tutorial</Button>
-                        </div>
-                        <Link to={RoutesConstants.CARD_DESIGNS} className={"principal-header-button-container"}>
-                            <Button className={"principal-header-button"}>Personalizar</Button>
-                        </Link>
-                        <div className={"principal-header-button-container"}>
-                            <Button className={"principal-header-button"}>Conprar tokens</Button>
-                        </div>
-                    </ButtonGroup>
-                </div>
-                <div id={"principal-header-info"}>
-                    <div id={"principal-header-info-image"}></div>
-                    <h2 id={"principal-header-info-tokens"}>{user.tokens}</h2>
-                </div>
+                        </a>
+                    </div>
+                    <Link to={RoutesConstants.CARD_DESIGNS} className={"principal-header-button-container"}>
+                        <Button className={"principal-header-button"}>Personalizar</Button>
+                    </Link>
+                    <div className={"principal-header-button-container"}>
+                        <Button className={"principal-header-button"} onClick={() => props.setOpenTokens(true)}>Comprar
+                            tokens</Button>
+                    </div>
+                </ButtonGroup>
             </div>
-        )
-    }
+            <div id={"principal-header-info"}>
+                {user ? <img id={"principal-header-info-image"}
+                             src={"/src/assets/profile-images/" + user.icon + ".png"}></img> : <></>}
+                {user ? <h2 id={"principal-header-info-tokens"}>{user.tokens}</h2> : <></>}
+            </div>
+        </div>
+    )
+
 }
 
 export default PrincipalHeaderComponent;

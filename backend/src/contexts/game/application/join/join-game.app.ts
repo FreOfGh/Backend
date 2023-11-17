@@ -35,7 +35,7 @@ export class JoinGameApp {
         const user: User = await this.searchUserByIdApp.exec(userId);
         this.validateUser(game, user);
         await this.updateUser(game, user);
-        await this.createPlayerApp.exec(userId, game.gameId);
+        await this.createPlayerApp.exec(userId, user.username, user.icon, user.cardDesign, game.gameId);
         const updated: Game = await this.updateGame(game);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return updated;

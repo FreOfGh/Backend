@@ -18,7 +18,13 @@ export class CreatePlayerApp {
     ) {
     }
 
-    private static map(userId: UserId, gameId: GameId): Player {
+    private static map(
+        userId: UserId,
+        username: string,
+        userIcon: string,
+        userDesign: string,
+        gameId: GameId
+    ): Player {
         return Player.fromPrimitives({
             gameId: gameId.toString(),
             playerId: PlayerId.create().toString(),
@@ -26,16 +32,25 @@ export class CreatePlayerApp {
             score: 0,
             status: PlayerStatusConstants.WAITING_GAME,
             userId: userId.toString(),
+            username,
+            userIcon,
+            userDesign,
             terna1: [],
             terna2: [],
             cuarta: [],
         });
     }
 
-    async exec(userId: UserId, gameId: GameId): Promise<Player> {
+    async exec(
+        userId: UserId,
+        username: string,
+        userIcon: string,
+        userDesign: string,
+        gameId: GameId
+    ): Promise<Player> {
         this.logger.log(`[${this.exec.name}] INIT ::`);
         await this.validateIfUserIsPlaying(userId);
-        const player: Player = CreatePlayerApp.map(userId, gameId);
+        const player: Player = CreatePlayerApp.map(userId, username, userIcon, userDesign, gameId);
         const created: Player = await this.repository.create(player);
         this.logger.log(`[${this.exec.name}] FINISH ::`);
         return created;

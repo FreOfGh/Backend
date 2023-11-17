@@ -8,6 +8,7 @@ import HomePage from "./pages/home/home.page.tsx";
 import {PrincipalPage} from "./pages/principal/principal.page.tsx";
 import {SessionStorageConstants} from "./constants/session-storage.constants.ts";
 import CardDesignsPage from "./pages/card-designs/card-designs.page.tsx";
+import GamePage from "./pages/game/game.page.tsx";
 
 
 const theme = createTheme({
@@ -24,17 +25,15 @@ export const Guard = ({element}: { element: React.ReactNode }): React.ReactNode 
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path={RoutesConstants.GAME} element={<Guard element={<p>Game</p>}/>}></Route>
-                    <Route path={RoutesConstants.CARD_DESIGNS} element={<Guard element={<CardDesignsPage/>}/>}></Route>
-                    <Route path={RoutesConstants.PRINCIPAL} element={<Guard element={<PrincipalPage/>}/>}></Route>
-                    <Route path={RoutesConstants.HOME} element={<HomePage/>}></Route>
-                    <Route path='*' element={<Navigate to={RoutesConstants.HOME} replace/>}/>
-                </Routes>
-            </BrowserRouter>
-        </ThemeProvider>
-    </React.StrictMode>,
+    <ThemeProvider theme={theme}>
+        <BrowserRouter>
+            <Routes>
+                <Route path={RoutesConstants.GAME} element={<Guard element={<GamePage/>}/>}></Route>
+                <Route path={RoutesConstants.CARD_DESIGNS} element={<Guard element={<CardDesignsPage/>}/>}></Route>
+                <Route path={RoutesConstants.PRINCIPAL} element={<Guard element={<PrincipalPage/>}/>}></Route>
+                <Route path={RoutesConstants.HOME} element={<HomePage/>}></Route>
+                <Route path='*' element={<Navigate to={RoutesConstants.HOME} replace/>}/>
+            </Routes>
+        </BrowserRouter>
+    </ThemeProvider>
 )

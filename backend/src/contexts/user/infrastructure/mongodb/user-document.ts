@@ -11,6 +11,10 @@ const definition: SchemaDefinitionType<User> = {
         type: String,
         required: true,
     },
+    icon: {
+        type: String,
+        required: true,
+    },
     password: {
         type: String,
         required: true

@@ -6,7 +6,8 @@ type User =  {
     status: string,
     tokens: number,
     createdAt: Date,
-    "updatedAt": Date
+    updatedAt: Date,
+    icon: string,
 }
 
 export default User;

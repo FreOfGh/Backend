@@ -27,6 +27,8 @@ export class RegisterUserApp {
     }
 
     private static map(username: string, password: string, cardDesign?: CardDesign): User {
+        const random: number = Math.floor(Math.random() * 5);
+        const icon: string = ['1', '2', '3', '4', '5'][random];
         return User.fromPrimitives({
             cardDesign: cardDesign ? cardDesign.name : CardDesignDefaultConstant,
             password: UserPassword.hash(password),
@@ -34,6 +36,7 @@ export class RegisterUserApp {
             tokens: 100,
             userId: UserId.create().toString(),
             username: username.toLowerCase(),
+            icon
         });
     }
 

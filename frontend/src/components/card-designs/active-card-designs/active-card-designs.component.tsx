@@ -37,7 +37,6 @@ function ActiveCardDesignsComponent(props: {
             props.setAlertMessage(AlertMessagesConstants.CANNOT_GET_ACTIVE_CARD_DESIGNS)
         }
 
-
         fetchData();
     }, []);
 

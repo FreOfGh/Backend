@@ -7,6 +7,7 @@ export class UserDto {
     @ApiProperty() cardDesign: string;
     @ApiProperty() status: string;
     @ApiProperty() tokens: number;
+    @ApiProperty() icon: string;
     @ApiProperty() createdAt?: Date;
     @ApiProperty() updatedAt?: Date;
 }
