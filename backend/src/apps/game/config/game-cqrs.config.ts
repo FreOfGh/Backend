@@ -4,6 +4,9 @@ import {
 import {CreateGameCommandHandler} from '../../../contexts/game/application/create/create-game.command-handler';
 import {JoinGameCommandHandler} from '../../../contexts/game/application/join/join-game.command-handler';
 import {JoinGameRoomCommandHandler} from '../../../contexts/game/application/join/room/join-game-room.command-handler';
+import {
+    SearchGameByIdQueryHandler
+} from '../../../contexts/game/application/search/by-id/search-game-by-id.query-handler';
 
 const CommandHandlers = [
     CreateGameCommandHandler,
@@ -11,7 +14,10 @@ const CommandHandlers = [
     JoinGameRoomCommandHandler,
 ];
 
-const QueryHandlers = [SearchPublicGamesQueryHandler];
+const QueryHandlers = [
+    SearchGameByIdQueryHandler,
+    SearchPublicGamesQueryHandler,
+];
 export const GameCqrsConfig = [
     ...CommandHandlers,
     ...QueryHandlers,

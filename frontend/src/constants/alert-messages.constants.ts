@@ -3,6 +3,7 @@ enum AlertMessagesConstants {
     WARNING_ALERT = 'warning',
     SUCCESS_ALERT = 'success',
     USERNAME_MISSING = "Debes ingresar el usuario",
+    GAME_NOT_FOUND_ERROR = "El juego no existe",
     GAME_NAME_MISSING = "Debes ingresar el nombre del juego",
     GAME_BET_MISSING = "Debes ingresar el total para apostar",
     NOT_ENOUGH_TOKENS_ERROR = "No tienes suficientes tokens",
@@ -16,7 +17,9 @@ enum AlertMessagesConstants {
     CANNOT_GET_ACTIVE_CARD_DESIGNS = "No se pueden obtener los diseños activos",
     CANNOT_GET_PLAYERS = "No se puede obtener los jugadores",
     CARD_DESIGN_NOT_CHANGE = "El diseño no ha sido cambiado",
-    CARD_DESIGN_CHANGED = "El diseño ha sido actualizado"
+    CARD_DESIGN_CHANGED = "El diseño ha sido actualizado",
+    CODE_GAME_MISSING = "Debes ingresar el código para ingresar",
+    CODE_GAME_LENGTH_INVALID = "El código es inválido",
 }
 
 export default AlertMessagesConstants;

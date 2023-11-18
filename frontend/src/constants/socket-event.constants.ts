@@ -1,6 +1,7 @@
-export enum GameEventsConstants {
-    EVENT_JOIN_GAME = 'EVENT_JOIN_GAME',
+export enum SocketEventConstants {
     EVENT_START_GAME = 'EVENT_START_GAME',
     EVENT_START_TURN = 'EVENT_START_TURN',
     EVENT_CHANGE_TURN = 'EVENT_CHANGE_TURN',
+    EVENT_ERROR = 'EVENT_ERROR',
+    EVENT_JOIN_GAME = 'EVENT_JOIN_GAME',
 }

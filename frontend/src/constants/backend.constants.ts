@@ -5,6 +5,9 @@ export enum BackendConstants {
     LOGIN_URL = '/api/v1/user/login',
     REGISTER_URL = '/api/v1/user/register',
     CREATE_GAME_URL = '/api/v1/game/create',
+    JOIN_GAME_URL = '/api/v1/game/join',
     GET_PUBLIC_GAMES_URL = '/api/v1/game/public',
-    GET_PLAYERS_URL = '/api/v1/player/game'
+    GET_PLAYERS_URL = '/api/v1/player/game',
+    GET_PLAYER_URL = '/api/v1/player/user',
+    GET_GAME_URL = '/api/v1/game/id'
 }

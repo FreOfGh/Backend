@@ -22,6 +22,7 @@ import {SearchGameByIdAppProvider} from '../../contexts/game/application/search/
 import {GameSocket} from './sockets/game.socket';
 import {JwtModule} from '@nestjs/jwt';
 import {MatchModule} from '../match/match.module';
+import {SearchGameByIdController} from './controllers/search/by-id/search-game-by-id.controller';
 
 @Module({
     imports: [
@@ -34,6 +35,7 @@ import {MatchModule} from '../match/match.module';
     controllers: [
         CreateGameController,
         JoinGameController,
+        SearchGameByIdController,
         SearchPublicGamesController,
     ],
     providers: [

@@ -6,4 +6,5 @@ export enum GameConfigConstants {
     JOIN_GAME = 'join',
     UPDATE_CARD_DESIGN = 'card-design',
     SOCKET_NAMESPACE = 'games',
+    SEARCH_GAME_BY_ID = 'id',
 }

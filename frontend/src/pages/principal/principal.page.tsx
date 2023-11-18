@@ -38,6 +38,8 @@ export function PrincipalPage() {
             </div>
             <div id={"principal-page-join-game"}>
                 <JoinGameComponent
+                    setAlertMessage={setAlertMessage}
+                    setAlertType={setAlertType}
                     setLoading={setloadingPublicGames}
                     loading={loadingPublicGames}
                 ></JoinGameComponent>

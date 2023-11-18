@@ -12,38 +12,44 @@ import User from "../../../types/models/user.ts";
 import {PlayerStatusConstants} from "../../../constants/player-status.constants.ts";
 
 function GamePlayersComponent(props: {
+    searchPlayers: boolean,
+    setSearchPlayers: (param: boolean) => (void),
     setLoading: (param: boolean) => (void),
     setAlertMessage: (param: string) => (void),
 }) {
 
     const user: User = JSON.parse(sessionStorage.getItem(SessionStorageConstants.USER) as string);
     const [players, setPlayers] = useState<Array<Player> | null>(null)
-    useEffect(() => {
-        async function fetchData() {
-            props.setLoading(true);
-            try {
-                const token: string = sessionStorage.getItem(SessionStorageConstants.AUTH_TOKEN) as string;
-                const game: Game = JSON.parse(sessionStorage.getItem(SessionStorageConstants.CURRENT_GAME) as string);
-                const request: GetPlayersRequest = {gameId: game.gameId};
-                const {data} = await AxiosUtils.get<GetPlayersResponse, GetPlayersRequest>(
-                    BackendConstants.GET_PLAYERS_URL, request, token
-                );
-                setPlayers(data.data);
-                props.setLoading(false);
-            } catch (err) {
-                AxiosUtils.mapError(err as ErrorResponse, mapErrorsGettingActive)
-            }
-        }
 
-        const mapErrorsGettingActive = (): void | boolean => {
+    const searchPlayers = async (setLoading?: boolean) => {
+        if (setLoading) props.setLoading(true);
+        try {
+            const token: string = sessionStorage.getItem(SessionStorageConstants.AUTH_TOKEN) as string;
+            const game: Game = JSON.parse(sessionStorage.getItem(SessionStorageConstants.CURRENT_GAME) as string);
+            const request: GetPlayersRequest = {gameId: game.gameId};
+            const {data} = await AxiosUtils.get<GetPlayersResponse, GetPlayersRequest>(
+                BackendConstants.GET_PLAYERS_URL, request, token
+            );
+            setPlayers(data.data);
+            props.setSearchPlayers(false);
             props.setLoading(false);
-            props.setAlertMessage(AlertMessagesConstants.CANNOT_GET_PLAYERS)
+        } catch (err) {
+            AxiosUtils.mapError(err as ErrorResponse, mapErrorsGettingActive)
         }
+    }
 
-        fetchData();
+    const mapErrorsGettingActive = (): void | boolean => {
+        props.setSearchPlayers(false);
+        props.setLoading(false);
+        props.setAlertMessage(AlertMessagesConstants.CANNOT_GET_PLAYERS)
+    }
+
+
+    useEffect(() => {
+        searchPlayers(true);
     }, []);
 
-
+    if (props.searchPlayers) searchPlayers();
     return (
         <div id={"game-players-component-container"}>
             {players ? players.map((player) => {

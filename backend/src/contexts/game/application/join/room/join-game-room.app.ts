@@ -30,6 +30,9 @@ export class JoinGameRoomApp {
         this.logger.log(`[${this.exec.name}] INIT :: gameId: ${gameId.toString()}`);
         const game: Game = await this.searchGameByIdApp.exec(gameId);
         if (game.status.toString() !== GameStatusConstants.WAITING_PLAYERS) return;
+        this.socket.wsServer
+            .in(gameId.toString())
+            .emit(GameEventsConstants.EVENT_JOIN_GAME);
         if (game.requiredPlayers === game.totalPlayers) {
             const updated: Game = await this.updateGame(game);
             await this.crateMatchApp.exec(updated);
