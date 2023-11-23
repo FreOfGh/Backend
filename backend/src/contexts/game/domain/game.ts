@@ -90,4 +90,11 @@ export class Game {
             this.currentPlayers++;
         }
     }
+
+    public removePlayer(): void {
+        if (this.status.toString() === GameStatusConstants.ACTIVE) {
+            this.currentPlayers--;
+            if (this.currentPlayers == 1) this.status = new GameStatus(GameStatusConstants.FINISHED);
+        }
+    }
 }

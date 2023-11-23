@@ -55,4 +55,8 @@ export class MongoPlayerRepository implements IPlayerRepository {
         this.logger.log(`[${this.update.name}] FINISH ::`);
         return mapped;
     }
+
+    public async delete(player: Player): Promise<void> {
+        await this.model.findOneAndDelete({playerId: player.playerId.toString()});
+    }
 }

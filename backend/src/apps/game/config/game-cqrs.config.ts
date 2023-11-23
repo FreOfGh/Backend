@@ -7,11 +7,13 @@ import {JoinGameRoomCommandHandler} from '../../../contexts/game/application/joi
 import {
     SearchGameByIdQueryHandler
 } from '../../../contexts/game/application/search/by-id/search-game-by-id.query-handler';
+import {LeaveGameCommandHandler} from '../../../contexts/game/application/leave/leave-game.command-handler';
 
 const CommandHandlers = [
     CreateGameCommandHandler,
     JoinGameCommandHandler,
     JoinGameRoomCommandHandler,
+    LeaveGameCommandHandler,
 ];
 
 const QueryHandlers = [

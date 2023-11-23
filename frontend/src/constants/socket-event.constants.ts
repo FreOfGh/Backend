@@ -4,4 +4,5 @@ export enum SocketEventConstants {
     EVENT_CHANGE_TURN = 'EVENT_CHANGE_TURN',
     EVENT_ERROR = 'EVENT_ERROR',
     EVENT_JOIN_GAME = 'EVENT_JOIN_GAME',
+    EVENT_WIN_GAME = 'EVENT_WIN_GAME',
 }

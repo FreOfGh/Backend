@@ -16,6 +16,8 @@ import {BackendConstants} from "../../constants/backend.constants.ts";
 import {GameStatusConstants} from "../../constants/game-status.constants.ts";
 import GetGameRequest from "../../types/services/get-game/get-game.request.ts";
 import GetGameResponse from "../../types/services/get-game/get-game.response.ts";
+import {Navigate} from "react-router-dom";
+import {RoutesConstants} from "../../constants/routes.constants.ts";
 
 function GamePage() {
 
@@ -24,6 +26,7 @@ function GamePage() {
     const [loadingPlayers, setLoadingPlayers] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType] = useState(AlertMessagesConstants.ERROR_ALERT as string);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
 
@@ -36,7 +39,6 @@ function GamePage() {
                 sessionStorage.setItem(SessionStorageConstants.CURRENT_GAME, JSON.stringify(data.data));
                 setSearchCurrentPlayer(game && game.status == GameStatusConstants.ACTIVE);
             } catch (err) {
-                AxiosUtils.mapError(err as ErrorResponse, mapErrorsGettingActive)
             }
         }
 
@@ -64,6 +66,10 @@ function GamePage() {
             socket.on(SocketEventConstants.EVENT_ERROR, (e: ErrorResponse) => {
                 setAlertMessage(AlertsUtils.resolveMessage(e.response.data.message));
             });
+            socket.on(SocketEventConstants.EVENT_WIN_GAME, () => {
+                setAlertMessage(AlertsUtils.resolveMessage(AlertMessagesConstants.YOU_WIN_THE_GAME));
+                setRedirect(true);
+            })
         });
     }, []);
 
@@ -91,7 +97,9 @@ function GamePage() {
                 type={alertType}
                 setAlertMessage={setAlertMessage}
             />
+            {redirect ? <Navigate to={RoutesConstants.PRINCIPAL}></Navigate> : <></>}
         </div>
+
     )
 }
 

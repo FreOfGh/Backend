@@ -23,6 +23,8 @@ import {GameSocket} from './sockets/game.socket';
 import {JwtModule} from '@nestjs/jwt';
 import {MatchModule} from '../match/match.module';
 import {SearchGameByIdController} from './controllers/search/by-id/search-game-by-id.controller';
+import {LeaveGameAppProvider} from '../../contexts/game/application/leave/leave-game.app.provider';
+import {LeaveGameController} from './controllers/leave/leave-game.controller';
 
 @Module({
     imports: [
@@ -37,6 +39,7 @@ import {SearchGameByIdController} from './controllers/search/by-id/search-game-b
         JoinGameController,
         SearchGameByIdController,
         SearchPublicGamesController,
+        LeaveGameController,
     ],
     providers: [
         GameSocket,
@@ -50,6 +53,7 @@ import {SearchGameByIdController} from './controllers/search/by-id/search-game-b
         JoinGameAppProvider,
         JoinGameRoomAppProvider,
         SearchGameByIdAppProvider,
+        LeaveGameAppProvider
     ],
     exports: [GameSocket]
 })

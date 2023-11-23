@@ -15,7 +15,7 @@ export class Player {
     public readonly cuarta: Array<Card>;
     public sobrante?: Card;
     public readonly gameId: GameId;
-    private readonly userId: UserId;
+    public readonly userId: UserId;
     private readonly username: string;
     private readonly userIcon: string;
     private readonly userDesign: string;

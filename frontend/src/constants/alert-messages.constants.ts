@@ -20,6 +20,7 @@ enum AlertMessagesConstants {
     CARD_DESIGN_CHANGED = "El diseño ha sido actualizado",
     CODE_GAME_MISSING = "Debes ingresar el código para ingresar",
     CODE_GAME_LENGTH_INVALID = "El código es inválido",
+    YOU_WIN_THE_GAME = "Ganaste el juego."
 }
 
 export default AlertMessagesConstants;

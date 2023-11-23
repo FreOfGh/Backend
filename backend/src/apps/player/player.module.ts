@@ -64,6 +64,7 @@ import {SearchPlayerByUserController} from './controllers/search/by-user/search-
     exports: [
         SearchPlayerByUserQueryHandler,
         ThrowCardCommandHandler,
+        MongoPlayerRepositoryProvider,
         CreatePlayerAppProvider,
         SearchPlayersByGameAppProvider,
         UpdatePlayerAppProvider,

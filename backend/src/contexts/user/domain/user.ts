@@ -11,7 +11,7 @@ export class User {
     public readonly username: string;
     public readonly icon: string;
     public cardDesign: string;
-    private tokens: number;
+    public tokens: number;
     private readonly createdAt?: Date;
     private readonly updatedAt?: Date;
 
@@ -70,7 +70,7 @@ export class User {
     }
 
     public removeTokens(value: number): void {
-        if (value <= this.tokens) this.tokens = this.tokens - value;
+        if (value <= this.tokens) this.tokens-=value;
     }
 
     public setCardDesign(cardDesign: CardDesign): void {

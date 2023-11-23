@@ -13,4 +13,6 @@ export interface IPlayerRepository {
     create(player: Player): Promise<Player>;
 
     update(player: Player): Promise<Player>;
+
+    delete(player: Player): Promise<void>;
 }
